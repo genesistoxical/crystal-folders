@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:CrystalFolders.Properties"
+        xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="CrystalFolders.About"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.AboutTitle}" FontFamily="{DynamicResource NotoMusic}" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" RenderOptions.ClearTypeHint="Enabled" Height="352" Width="726" WindowStyle="None" MouseDown="Window_MouseDown" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" UseLayoutRounding="True" SnapsToDevicePixels="True" FontSize="11" Loaded="Window_Loaded" Closing="Window_Closing" Background="{x:Null}" Icon="/Resources/Icon.ico" AllowsTransparency="True">
+    <Grid Height="352" VerticalAlignment="Center">
+        <Border x:Name="Bg" CornerRadius="0,0,8,8" BorderBrush="#FFE3E3E3" Background="White" Height="347" VerticalAlignment="Top" Margin="0,5,0,0" d:IsLocked="True"/>
+        <Border x:Name="Border" BorderThickness="1,0,1,1" CornerRadius="0,0,7,7" BorderBrush="#FFE3E3E3" Height="347" VerticalAlignment="Top" Margin="0,5,0,0" d:IsLocked="True"/>
+        <Border x:Name="Deco" Grid.Row="0" CornerRadius="7,7,0,0" BorderBrush="#FFB5B5B5" Background="{DynamicResource Primary}" Height="5" VerticalAlignment="Top"/>
+        <Border BorderThickness="1,1,1,1" Grid.Row="0" CornerRadius="4,4,4,4" BorderBrush="#FFE3E3E3" Margin="157,35,36,0" Height="257" VerticalAlignment="Top"/>
+        <Label x:Name="Lang" Content="{x:Static properties:Resources.LanguageEnglish}" Margin="172,312,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Foreground="Black" Background="{x:Null}"/>
+        <Separator Margin="178,236,57,0" Height="13" VerticalAlignment="Top"/>
+        <Button x:Name="Back" Content="Button" hc:BorderElement.CornerRadius="0" HorizontalAlignment="Left" Margin="676,316,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="15" Height="15" UseLayoutRounding="True" Background="#FF747474" Click="Back_Click">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Resources/arrow-left-circle.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Button x:Name="Caret" Content="Button" hc:BorderElement.CornerRadius="0" HorizontalAlignment="Left" Margin="153,316,0,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="{x:Null}" Width="15" Height="15" UseLayoutRounding="True" Background="#FF747474" Click="Caret_Click" Cursor="Hand">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Resources/caret-vertical-small.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Label x:Name="Description" Content="{x:Static properties:Resources.AppToCustomizeFolderIcons}" Margin="203,255,57,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Height="21" Padding="0,0,0,0" HorizontalAlignment="Stretch" Foreground="#FF8E8E8E" HorizontalContentAlignment="Left" Background="{x:Null}"/>
+        <hc:ScrollViewer x:Name="ScrollView" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="175,49,0,0" Height="178" VerticalAlignment="Top" HorizontalAlignment="Left" Width="497" CanContentScroll="True">
+            <hc:TextBox x:Name="License" TextWrapping="Wrap" Height="178" BorderThickness="0,0,0,0" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Background="{x:Null}" Padding="8,3,6,6" Text="MIT License&#xA;&#xA;Copyright (c) 2025 Génesis Toxical&#xA;&#xA;Permission is hereby granted, free of charge, to any person obtaining a copy&#xA;of this software and associated documentation files (the &quot;Software&quot;), to deal&#xA;in the Software without restriction, including without limitation the rights&#xA;to use, copy, modify, merge, publish, distribute, sublicense, and/or sell&#xA;copies of the Software, and to permit persons to whom the Software is&#xA;furnished to do so, subject to the following conditions:&#xA;&#xA;The above copyright notice and this permission notice shall be included in all&#xA;copies or substantial portions of the Software.&#xA;&#xA;THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR&#xA;IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,&#xA;FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE&#xA;AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER&#xA;LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,&#xA;OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE&#xA;SOFTWARE."/>
+        </hc:ScrollViewer>
+        <Button x:Name="Link" hc:BorderElement.CornerRadius="0" Width="15" Height="15" UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="181,259,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="#FF989898" RenderTransformOrigin="0.571,0.533" Click="Link_Click" Cursor="Hand">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/Resources/link.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Label x:Name="Btn_2" Content="Noto Music" Margin="46,100,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" MouseDown="Btn_2_MouseDown" Cursor="Hand"/>
+        <Label x:Name="Btn_1" Content="Crystal Folders" Margin="46,69,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="84" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" MouseDown="Btn_1_MouseDown" Cursor="Hand" Opacity="0.7"/>
+        <Label x:Name="Btn_Teeny" Content="Teenyicons" Margin="46,162,0,0" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" MouseDown="Btn_Teeny_MouseDown" Cursor="Hand" VerticalAlignment="Top"/>
+        <Label x:Name="Btn_Folder" Content="FolderBrowserEx" Margin="46,131,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" MouseDown="Btn_Folder_MouseDown" Cursor="Hand"/>
+        <Label x:Name="Btn_Jam" Content="Jam icons" Margin="46,193,0,0" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" VerticalAlignment="Top" Cursor="Hand" MouseDown="Btn_Jam_MouseDown"/>
+        <Label x:Name="Btn_Handy" Content="HandyControls" Margin="46,224,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="11" Cursor="Hand" MouseDown="Btn_Handy_MouseDown"/>
+        <Label x:Name="Back_Next" Content="{x:Static properties:Resources.Next}" Margin="46,255,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,0" BorderBrush="{x:Null}" Background="{x:Null}" Width="95" Height="20" Padding="0,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="9" RenderTransformOrigin="0.464,0.6" Cursor="Hand" Foreground="#FF8E8E8E" MouseDown="Back_Next_MouseDown"/>
+        <Label Content="{x:Static properties:Resources.About}" HorizontalAlignment="Left" Margin="17,29,0,0" VerticalAlignment="Top" BorderThickness="3,0,0,0" ClipToBounds="True" FontSize="13" BorderBrush="{x:Null}" Background="{x:Null}" Padding="10,2,10,6"/>
+        <Label Content="{x:Static properties:Resources.Options}" HorizontalAlignment="Left" Margin="17,307,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderThickness="0,0,0,0" FontSize="13" BorderBrush="{x:Null}" Padding="10,2,10,6"/>
+        <Label x:Name="Arrw_1" Content="▶" Margin="29,69,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" Visibility="Visible"/>
+        <Label x:Name="Arrw_2" Content="▶" Margin="29,100,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" Visibility="Hidden"/>
+        <Label x:Name="Arrw_Folder" Content="▶" Margin="29,131,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" Visibility="Hidden"/>
+        <Label x:Name="Arrw_Teeny" Content="▶" Margin="29,162,0,0" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Label x:Name="Arrw_Jam" Content="▶" Margin="29,193,0,0" VerticalAlignment="Top" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" Visibility="Hidden"/>
+        <Label x:Name="Arrw_Handy" Content="▶" Margin="29,224,0,0" BorderThickness="0,0,0,3" BorderBrush="{x:Null}" Background="{x:Null}" Width="10" Height="20" Padding="1,0,0,0" HorizontalAlignment="Left" HorizontalContentAlignment="Left" FontSize="10" Foreground="{DynamicResource Primary}" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Button x:Name="ChangeTheme" Content="{x:Static properties:Resources.ChangeTheme}" HorizontalAlignment="Left" Margin="389,312,0,0" VerticalAlignment="Top" Padding="0,0,0,0" Height="20" BorderThickness="0,0,0,0" Foreground="#FF8E8E8E" FontSize="11" Background="{x:Null}" HorizontalContentAlignment="Left" Click="ChangeTheme_Click" Cursor="Hand"/>
+    </Grid>
+    <Window.Resources>
+        <ToolTip x:Key="FooToolTip">
+            <StackPanel>
+                <TextBlock Text="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource AncestorType={x:Type ToolTip}}}"/>
+            </StackPanel>
+        </ToolTip>
+    </Window.Resources>
+</Window>

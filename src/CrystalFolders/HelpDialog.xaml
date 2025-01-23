@@ -1,0 +1,14 @@
+﻿<Window x:Class="CrystalFolders.HelpDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:CrystalFolders.Properties"
+        xmlns:local="clr-namespace:CrystalFolders"
+        mc:Ignorable="d"
+        Title="{x:Static properties:Resources.Help}" FontFamily="{DynamicResource NotoMusic}" TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Height="258" Width="321" Icon="/Resources/Icon.ico">
+    <Grid Width="321" Height="243">
+        <Border x:Name="Deco" BorderBrush="#FF000000" Opacity="0.7" CornerRadius="7,7,7,7" Margin="28,29,0,198" Background="{DynamicResource Primary}" HorizontalAlignment="Left" Width="127"/>
+        <TextBlock x:Name="Text" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="194" Width="259" FontSize="11" Margin="34,26,0,0"><Run Text="Configure as portable   will make the custom icon visible on any other PC."/><LineBreak/><Run/><LineBreak/><Run Text="It works by dragging folders to the left panel without checking any checkbox, otherwise this switch will not be able to turn on."/><LineBreak/><Run/><LineBreak/><Run Text="Because the icon will be copied (hidden) within each folder, there is a limit to customize, which is up to 30."/></TextBlock>
+    </Grid>
+</Window>

@@ -1,0 +1,9 @@
+theme: jekyll-theme-cayman
+title: [Crystal Folders]
+description: [s]
+show_downloads: true
+
+github:
+  zip_url: https://github.com/genesistoxical/crystal-folders/releases/latest/download/Crystal-Folders.zip
+  tar_url: https://github.com/genesistoxical/crystal-folders/releases/latest/download/Crystal-Folders-Installer.exe
+  is_project_page: false

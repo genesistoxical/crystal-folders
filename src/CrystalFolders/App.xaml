@@ -1,0 +1,22 @@
+﻿<Application x:Class="CrystalFolders.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CrystalFolders"
+             StartupUri="MainWindow.xaml"
+             xmlns:hc="https://handyorg.github.io/handycontrol">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <hc:ThemeResources RequestedTheme="Light" AccentColor="#FFFF69B4"/>
+                <hc:Theme/>
+                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <FontFamily x:Key="NotoMusic">./Docs/Noto Music/NotoMusic-Regular.ttf#Noto Music</FontFamily>
+            <SolidColorBrush x:Key="Primary" Color="#FFFF69B4"/>
+            <SolidColorBrush x:Key="Background" Color="#FFF1F1F7"/>
+            <SolidColorBrush x:Key="Border" Color="#FFC9CBE2"/>
+            <BitmapImage x:Key="Restore-icon" UriSource="Resources/restore-icon.png"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
