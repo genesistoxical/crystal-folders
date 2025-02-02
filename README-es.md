@@ -45,10 +45,10 @@ En el panel izquierdo hay un área donde se mostrará la lista de directorios o 
 * Activa la o las casillas que desees personalizar, por ejemplo: si seleccionaste _Documentos_, se agregarán a la lista todas las carpetas que se encuentran dentro. Puedes desactivarlas en cualquier momento para quitar esos directorios.
 * Arrastrando y soltando carpetas en el área mencionada anteriormente, incluso si ya has activado casillas.
 
-Para quitar carpetas una por una, debes seleccionarla en la lista y cliquear el icono **⦵**.
+Para quitar carpetas una por una, debes seleccionarla en la lista y cliquear **⦵**.
 
 𝟮. **Elegir un icono:**
-   En el panel derecho oprime el botón `Elegir…`; se abrirá una ventana con iconos de diferentes colores, aunque podrías usar uno propio siempre y cuando esté en formato ICO. Una vez que lo selecciones y oprimas en `Abrir` aparecerá en la vista previa.
+   En el panel derecho oprime el botón `Elegir…`; se abrirá una ventana con iconos por defecto en diferentes colores o podrías usar uno propio, solo debe estar en formato ICO. Una vez que lo selecciones y oprimas en `Abrir` aparecerá en la vista previa.
 
 𝟯. **Agregar subcarpetas:**
    Más abajo puedes activar el interruptor de `Agregar subcarpetas`, el cual también indicará la cantidad de subcarpetas totales. Si consideras que son demasiados o no te interesa, podrías simplemente desactivarlo, esto únicamente ayuda a tener una mejor experiencia de personalización.
@@ -65,7 +65,7 @@ Para quitar carpetas una por una, debes seleccionarla en la lista y cliquear el 
 Si la cantidad de carpetas supera los 600, se mostrará un mensaje preguntando si deseas continuar, sin embargo, el botón recomendado por defecto es `No` en caso de que prefieras disminuirla.
 ☑️ ¡Listo, así de fácil!, ya solo queda mirar tus carpetas personalizadas; en caso de no ver cambios, solo actualiza la ventana y/o escritorio.
 
-Recuerda que no es necesario cerrar la aplicación para limpiar la lista o las opciones que hayas elegido, basta con hacer clic en el botón **⟳**.
+Recuerda que no es necesario cerrar la aplicación para limpiar la lista o las opciones que hayas elegido, basta con hacer clic en **⟳**.
 
 <br/>
 

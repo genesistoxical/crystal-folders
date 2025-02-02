@@ -37,18 +37,18 @@
 <a href="#"><img src="docs/assets/Crystal-Folders-App.gif"/></a>
 
 ## Usage
-On the left panel there is an area where the directories or folders list to customize will be displayed. Below we can find icons with their respective checkboxes, which are: Documents, Pictures, Music, Videos and Desktop.
+On the left panel there is an area where the directories or folder list to customize will be displayed. Below we can find icons with their respective checkboxes, which are: Documents, Pictures, Music, Videos and Desktop.
 
 <br/>
 
 𝟭. Add folders, there are two ways:
-* Check the box(es) you want to customize, for example: if you selected _Documents_, all the folders inside will be added to the list. You can deactivate them at any time to remove those directories.
+* Check the box(es) you want to customize, for example: if you selected _Documents_, all the folders inside will be added to the list. You can uncheck them at any time to remove those directories.
 * By dragging and dropping folders into the area mentioned above, even if you have already checked boxes.
 
-To remove folders one by one, you must select it in the list and click the **⦵** icon.
+To remove folders one by one, you must select it in the list and click on **⦵**.
 
 𝟮. **Choose an icon:**
-   On the right panel press the `Choose…` button, a window will open with different color icons although you could use your own as long as it is in ICO format. Once you select it and press `Open` it will appear in the preview.
+   On the right panel press the `Choose…` button, a window will open with default icons in different colors or you could use your own, it just needs to be in ICO format. Once you select it and press `Open` it will appear in the preview.
 
 𝟯. **Add subfolders:**
    Further down you can turn on the `Add subfolders` switch, which will also indicate the total number of. If you find there are too many or you are not interested, you could simply turn it off, this only helps to have a better customization experience.
@@ -66,7 +66,7 @@ If the number of folders exceeds 600, a message will appear asking if you want t
 
 ☑️ That’s it, it’s that easy! Now all that’s left to do is look at your customized folders; if you don’t see any changes, just refresh the window and/or desktop.
 
-Remember, is not necessary to close the application to clear the list or options you have chosen, just click on the **⟳** button.
+Remember, is not necessary to close the application to clear the list or options you have chosen, just click on **⟳**.
 
 <br/>
 
