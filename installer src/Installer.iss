@@ -39,8 +39,9 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Files]
-Source: "..\src\CrystalFolders\bin\Release\*"; DestDir: "{app}"; Excludes: "*.ini"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "..\src\CrystalFolders\bin\Release\Config.ini*"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
+Source: "..\src\CrystalFolders\bin\Release\*"; DestDir: "{app}"; Excludes: "Folders, *.ini"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\src\CrystalFolders\bin\Release\Config.ini"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
+Source: "..\src\CrystalFolders\bin\Release\Folders\*"; DestDir: "{userappdata}\{#MyAppName}\Folders"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
