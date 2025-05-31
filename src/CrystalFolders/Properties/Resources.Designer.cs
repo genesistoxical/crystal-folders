@@ -61,7 +61,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a About.
+        ///   Busca una cadena traducida similar a About:.
         /// </summary>
         public static string About {
             get {
@@ -97,7 +97,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Application to customize your folder icons in seconds.
+        ///   Busca una cadena traducida similar a Application to customize your folder icons in a few seconds - v1.2.0.
         /// </summary>
         public static string AppToCustomizeFolderIcons {
             get {
@@ -106,7 +106,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Back.
+        ///   Busca una cadena traducida similar a 🢔🢔   Back.
         /// </summary>
         public static string Back {
             get {
@@ -277,7 +277,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Next.
+        ///   Busca una cadena traducida similar a Next   🢖🢖.
         /// </summary>
         public static string Next {
             get {
@@ -304,7 +304,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Options.
+        ///   Busca una cadena traducida similar a Options:.
         /// </summary>
         public static string Options {
             get {

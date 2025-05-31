@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -8,7 +6,7 @@ using System.Windows;
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
 [assembly: AssemblyTitle("Crystal Folders")]
-[assembly: AssemblyDescription("Application to customize your folder icons in seconds")]
+[assembly: AssemblyDescription("Application to customize your folder icons in a few seconds")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Génesis Toxical")]
 [assembly: AssemblyProduct("Crystal Folders")]
@@ -51,6 +49,6 @@ using System.Windows;
 // Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión
 // utilizando el carácter "*", como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.0.4")]
+[assembly: AssemblyFileVersion("1.2.0.4")]
 [assembly: Guid("E75EC856-CC76-4C9D-8F32-DE5903665162")]

@@ -1,4 +1,4 @@
-Crystal Folders is an application to customize your folder icons in seconds, for Windows.
+Crystal Folders is an app to customize your folder icons in a few seconds, for Windows.
 
 ## Features
 * Customize many folders in seconds.
@@ -24,9 +24,7 @@ Crystal Folders is an application to customize your folder icons in seconds, for
 ## Usage
 On the left panel there is an area where the directories or folder list to customize will be displayed. Below we can find icons with their respective checkboxes, which are: Documents, Pictures, Music, Videos and Desktop.
 
-<br/>
-
-𝟭. Add folders, there are two ways:
+𝟭. **Add folders**, there are two ways:
 * Check the box(es) you want to customize, for example: if you selected _Documents_, all the folders inside will be added to the list. You can uncheck them at any time to remove those directories.
 * By dragging and dropping folders into the area mentioned above, even if you have already checked boxes.
 
@@ -111,7 +109,7 @@ Click on the upper Info button, a new window will appear where you can:
 
 <br>
 <style>
-    h2.project-tagline:before {content: "Customize your folder icons in second";}
+    h2.project-tagline:before {content: "Customize your folder icons in a few second";}
     a.btn:nth-child(3):after {content: "ownload Portable";}
     a.btn:nth-child(4):after {content: "ownload Installer";}
 </style>

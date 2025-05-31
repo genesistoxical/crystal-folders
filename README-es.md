@@ -1,7 +1,7 @@
 <p align="center"></p>
 <p align="center"><a href="#"><img width="115px" src="docs/assets/Logo-115px.png" align="center" alt="Crystal Folders"/></a></p>
 <h1 align="center">Crystal Folders</h1>
-<p align="center">Crystal Folders es una aplicación para personalizar los iconos de tus carpetas en segundos, para Windows.</p>
+<p align="center">Crystal Folders es una aplicación para personalizar los iconos de tus carpetas en segundos, en Windows.</p>
 
 <p align="center">
  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-FF69B4?style=flat-square&labelColor=343B45"/></a>
@@ -41,7 +41,7 @@ En el panel izquierdo hay un área donde se mostrará la lista de directorios o 
 
 <br/>
 
-𝟭. Hay dos formas de agregar carpetas:
+𝟭. **Agregar carpetas**, existen dos formas:
 * Activa la o las casillas que desees personalizar, por ejemplo: si seleccionaste _Documentos_, se agregarán a la lista todas las carpetas que se encuentran dentro. Puedes desactivarlas en cualquier momento para quitar esos directorios.
 * Arrastrando y soltando carpetas en el área mencionada anteriormente, incluso si ya has activado casillas.
 
@@ -157,15 +157,18 @@ Message = true
 
 * [Noto Music](https://fonts.google.com/noto/specimen/Noto+Music) bajo [SIL Open Font License](/src/DropIcons/Docs/Noto%20Music/OFL.txt).
 
-* Icons are part of [Teenyicons](https://github.com/teenyicons/teenyicons) bajo [MIT License](https://github.com/teenyicons/teenyicons/blob/master/LICENSE).
+* Algunos iconos son parte de [Teenyicons](https://github.com/teenyicons/teenyicons) bajo [MIT License](https://github.com/teenyicons/teenyicons/blob/master/LICENSE).
 
-* [SharpVectors](https://github.com/ElinamLLC/SharpVectors/) bajo [BSD 3-Clause](https://github.com/ElinamLLC/SharpVectors/blob/master/License.md).
+* Iconos de checkboxes son parte de [Jam icons](https://github.com/michaelampr/jam) bajo [MIT License](https://github.com/michaelampr/jam/blob/master/LICENSE).
 
 * [WinVersion](https://github.com/shaovoon/win_version_detection) detection bajo [MIT License](https://github.com/shaovoon/win_version_detection/blob/main/LICENSE).
 
 * [Pixie Folders](https://genesistoxical.github.io/pixie-folders/) bajo [MIT License](https://github.com/genesistoxical/pixie-folders/blob/main/LICENSE).
 
 *Puedes encontrar todas las licencias [aquí](/src/CystalFolders/Docs).*
+
+## ¿Qué es lo nuevo?
+`Versión 1.2.0` evita que la fecha de modificación de la carpeta cambie al momento de personalizarlas. Y se agregaron un par de mejoras visuales a la ventana **Acerca de**.
 
 ## Licencia
 **MIT License**

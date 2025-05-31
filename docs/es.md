@@ -1,4 +1,4 @@
-Crystal Folders es una aplicación para personalizar los iconos de tus carpetas en segundos, para Windows.
+Crystal Folders es una aplicación para personalizar los iconos de tus carpetas en segundos, en Windows.
 
 ## Características
 * Personaliza muchas carpetas en segundos.
@@ -24,9 +24,7 @@ Crystal Folders es una aplicación para personalizar los iconos de tus carpetas 
 ## Uso
 En el panel izquierdo hay un área donde se mostrará la lista de directorios o carpetas a personalizar. Más abajo podemos encontrar iconos con sus respectivas casillas, los cuales son: Documentos, Imágenes, Música, Videos y Escritorio.
 
-<br/>
-
-𝟭. Hay dos formas de agregar carpetas:
+𝟭. **Agregar carpetas**, existen dos formas:
 * Activa la o las casillas que desees personalizar, por ejemplo: si seleccionaste _Documentos_, se agregarán a la lista todas las carpetas que se encuentran dentro. Puedes desactivarlas en cualquier momento para quitar esos directorios.
 * Arrastrando y soltando carpetas en el área mencionada anteriormente, incluso si ya has activado casillas.
 

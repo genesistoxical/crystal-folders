@@ -136,16 +136,16 @@
     <value>Icono</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Opciones</value>
+    <value>Opciones:</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Restaurar</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Siguiente</value>
+    <value>Siguiente   🢖🢖</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>Acerca de</value>
+    <value>Acerca de:</value>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Idioma: English</value>
@@ -157,7 +157,7 @@
     <value>Cambiar Tema...</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Regresar</value>
+    <value>🢔🢔   Regresar</value>
   </data>
   <data name="LanguageEspañol" xml:space="preserve">
     <value>Idioma: Español</value>
@@ -223,7 +223,7 @@
     <value> carpetas se han omitido porque no se permite personalizarlas.</value>
   </data>
   <data name="AppToCustomizeFolderIcons" xml:space="preserve">
-    <value>Aplicación para personalizar los iconos de tus carpetas en segundos</value>
+    <value>Aplicación para personalizar los iconos de tus carpetas en segundos - v1.2.0</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Aceptar</value>

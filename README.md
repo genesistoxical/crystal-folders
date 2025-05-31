@@ -1,7 +1,7 @@
 <p align="center"></p>
 <p align="center"><a href="#"><img width="115px" src="docs/assets/Logo-115px.png" align="center" alt="Crystal Folders"/></a></p>
 <h1 align="center">Crystal Folders</h1>
-<p align="center">Crystal Folders is an application to customize your folder icons in seconds, for Windows.</p>
+<p align="center">Crystal Folders is an app to customize your folder icons in a few seconds, for Windows.</p>
 
 <p align="center">
  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-FF69B4?style=flat-square&labelColor=343B45"/></a>
@@ -41,7 +41,7 @@ On the left panel there is an area where the directories or folder list to custo
 
 <br/>
 
-𝟭. Add folders, there are two ways:
+𝟭. **Add folders**, there are two ways:
 * Check the box(es) you want to customize, for example: if you selected _Documents_, all the folders inside will be added to the list. You can uncheck them at any time to remove those directories.
 * By dragging and dropping folders into the area mentioned above, even if you have already checked boxes.
 
@@ -166,6 +166,9 @@ Message = true
 * [Pixie Folders](https://genesistoxical.github.io/pixie-folders/) under [MIT License](https://github.com/genesistoxical/pixie-folders/blob/main/LICENSE).
 
 *You can find all licenses [here](/src/CystalFolders/Docs).*
+
+## What's new?
+`Version 1.2.0` prevents the folder modification date from changing when customizing them. A couple of visual improvements have been added to **About** window.
 
 ## License
 **MIT License**

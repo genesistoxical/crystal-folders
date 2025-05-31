@@ -127,7 +127,7 @@
     <value>Changes</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options</value>
+    <value>Options:</value>
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choose...</value>
@@ -142,10 +142,10 @@
     <value>Include subfolders</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>Next   🢖🢖</value>
   </data>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>About:</value>
   </data>
   <data name="LanguageEnglish" xml:space="preserve">
     <value>Language: English</value>
@@ -157,7 +157,7 @@
     <value>Change Theme...</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Back</value>
+    <value>🢔🢔   Back</value>
   </data>
   <data name="LanguageEspañol" xml:space="preserve">
     <value>Language: Español</value>
@@ -226,7 +226,7 @@
     <value> folders have been skipped because customization is not allowed.</value>
   </data>
   <data name="AppToCustomizeFolderIcons" xml:space="preserve">
-    <value>Application to customize your folder icons in seconds</value>
+    <value>Application to customize your folder icons in a few seconds - v1.2.0</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>

@@ -324,6 +324,10 @@ namespace CrystalFolders
                 // Si es un directorio...
                 if (Directory.Exists(directory))
                 {
+                    // Obtener la fecha de modificación de la carpeta
+                    DirectoryInfo folderInfo = new DirectoryInfo(directory);
+                    DateTime modifDate = folderInfo.LastWriteTime;
+
                     // Si el directorio tiene permisos de escritura y modificación
                     // o si no es solo la carperta de usuario
                     if (DirectoryPermissions(directory) && (directory != userPath))
@@ -366,6 +370,16 @@ namespace CrystalFolders
                     else
                     {
                         warnMssg++;
+                    }
+
+                    try
+                    {
+                        // Regresar la fecha de modificación de la carpeta
+                        Directory.SetLastWriteTime(directory, modifDate);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Folder LastWriteTime Error: " + directory);
                     }
                 }
                 else
@@ -543,8 +557,23 @@ namespace CrystalFolders
                     }
                 }
 
+                // Obtener la fecha de modificación de la carpeta
+                DirectoryInfo folderInfo = new DirectoryInfo(fullPath);
+                DateTime modifDate = folderInfo.LastWriteTime;
+
                 // Personalizar carpetas
                 ApplyFolderSettings(fullPath);
+
+                try
+                {
+                    // Regresar la fecha de modificación de la carpeta
+                    Directory.SetLastWriteTime(fullPath, modifDate);
+                }
+                catch
+                {
+                    Console.WriteLine("Folder LastWriteTime Error: " + fullPath);
+
+                }
             }
 
             // Growl message dependiendo de si se han personalizado o restaurado
