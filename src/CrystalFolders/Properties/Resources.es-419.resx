@@ -136,7 +136,7 @@
     <value>Icono</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Opciones:</value>
+    <value>Opciones</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Restaurar</value>
@@ -248,5 +248,8 @@
   </data>
   <data name="YourFoldersAreBeingRestored" xml:space="preserve">
     <value>Tus carpetas se están restaurando.</value>
+  </data>
+  <data name="OptionsAbout" xml:space="preserve">
+    <value>Opciones:</value>
   </data>
 </root>

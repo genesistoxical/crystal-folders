@@ -127,7 +127,7 @@
     <value>Changes</value>
   </data>
   <data name="Options" xml:space="preserve">
-    <value>Options:</value>
+    <value>Options</value>
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choose...</value>
@@ -248,5 +248,8 @@
   </data>
   <data name="YourFoldersAreBeingRestored" xml:space="preserve">
     <value>Your folders are being restored.</value>
+  </data>
+  <data name="OptionsAbout" xml:space="preserve">
+    <value>Options:</value>
   </data>
 </root>

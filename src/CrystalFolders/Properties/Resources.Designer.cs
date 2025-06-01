@@ -304,11 +304,20 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Options:.
+        ///   Busca una cadena traducida similar a Options.
         /// </summary>
         public static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Options:.
+        /// </summary>
+        public static string OptionsAbout {
+            get {
+                return ResourceManager.GetString("OptionsAbout", resourceCulture);
             }
         }
         
