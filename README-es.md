@@ -17,27 +17,27 @@
 
 ## Características
 * Personaliza muchas carpetas en segundos.
-* Agrega carpetas dentro de Documentos, Imágenes, etc. con un clic.
+* Agrega carpetas ubicadas dentro de Documentos, Imágenes, etc. con un clic.
 * Posibilidad de arrastrar y soltar.
-* Elegir entre diferentes iconos predeterminados o uno propio.
+* Elegir entre siete colores de iconos predeterminados o uno propio.
 * Opción para incluir subcarpetas.
 * Posibilidad de quitar directorios de la lista una vez agregados.
-* Número de carpetas y subcarpetas a personalizar.
+* Muestra el número de carpetas y subcarpetas a personalizar.
 * Opción para crear carpetas portables con icono personalizado.
 * Evita la duplicación de carpetas que se han añadido previamente. 
 * Notificaciones directamente en el escritorio.
-* Evita la personalización de carpetas con iconos del sistema.
+* Evita la personalización de carpetas que usan iconos del sistema.
 * Cambia entre el idioma Inglés y Español.
 * Guarda la configuración en un archivo .ini, excepto para los switches.
 * Personaliza el color del tema.
-* Modificación del archivo Desktop.ini sin perder información anterior.
+* Modificación del archivo Desktop.ini sin perder información.
 * Esquinas adaptables (redondeadas o metro), dependiendo la versión del sistema operativo.
 
 ## Previa
 <a href="#"><img src="docs/assets/Crystal-Folders-App.gif"/></a>
 
 ## Uso
-En el panel izquierdo hay un área donde se mostrará la lista de directorios o carpetas a personalizar. Más abajo podemos encontrar iconos con sus respectivas casillas, los cuales son: Documentos, Imágenes, Música, Videos y Escritorio.
+En el panel izquierdo hay un área donde se mostrará la lista de directorios o carpetas a personalizar. Más abajo encontrarás iconos con sus respectivas casillas, los cuales son: Documentos, Imágenes, Música, Videos y Escritorio.
 
 <br/>
 
@@ -48,10 +48,10 @@ En el panel izquierdo hay un área donde se mostrará la lista de directorios o 
 Para quitar carpetas una por una, debes seleccionarla en la lista y cliquear **⦵**.
 
 𝟮. **Elegir un icono:**
-   En el panel derecho oprime el botón `Elegir…`; se abrirá una ventana con iconos por defecto en diferentes colores o podrías usar uno propio, solo debe estar en formato ICO. Una vez que lo selecciones y oprimas en `Abrir` aparecerá en la vista previa.
+   En el panel derecho oprime el botón `Elegir…`; se abrirá una pequeña ventana con siete colores de iconos predeterminados o podrías buscar y utilizar uno propio, solo debe estar en formato ICO. Una vez que lo selecciones y oprimas en `Abrir`, aparecerá en la vista previa.
 
 𝟯. **Agregar subcarpetas:**
-   Más abajo puedes activar el interruptor de `Agregar subcarpetas`, el cual también indicará la cantidad de subcarpetas totales. Si consideras que son demasiados o no te interesa, podrías simplemente desactivarlo, esto únicamente ayuda a tener una mejor experiencia de personalización.
+   Más abajo puedes activar el interruptor de `Agregar subcarpetas`, el cual también indicará la cantidad de subcarpetas totales. Si consideras que son demasiados o no te interesa, simplemente desactívalo (esto únicamente ayuda a tener una mejor experiencia de personalización).
 
 <br/>
 
@@ -65,15 +65,15 @@ Para quitar carpetas una por una, debes seleccionarla en la lista y cliquear **�
 Si la cantidad de carpetas supera los 600, se mostrará un mensaje preguntando si deseas continuar, sin embargo, el botón recomendado por defecto es `No` en caso de que prefieras disminuirla.
 ☑️ ¡Listo, así de fácil!, ya solo queda mirar tus carpetas personalizadas; en caso de no ver cambios, solo actualiza la ventana y/o escritorio.
 
-Recuerda que no es necesario cerrar la aplicación para limpiar la lista o las opciones que hayas elegido, basta con hacer clic en **⟳**.
+Recuerda, para limpiar la lista o las opciones elegidas basta con hacer clic en **⟳**.
 
 <br/>
 
 ### Restaurar carpetas:
 
-𝟭. Deberás seguir los primeros pasos nuevamente; activando las casillas o arrastrando y soltandolos a la lista. La diferencia es: en vez de elegir un nuevo icono, deberás hacer clic en el botón `Restaurar` y como podrás notar aparecerá una flechita en lo que sería la vista previa, para indicarnos dicha acción.
+𝟭. Deberás seguir los primeros pasos nuevamente; activando las casillas o arrastrando y soltandolos a la lista. Solo que ahora en lugar de elegir un nuevo icono, deberás hacer clic en el botón `Restaurar` y como podrás notar aparecerá una flechita en lo que sería la vista previa para indicarnos dicha acción.
 
-𝟮. Podrás notar en el switch de abajo que ha cambiado a `Restaurar subfolders`, actívalo en caso de que los hayas personalizado antes.
+𝟮. El switch de abajo ha cambiado a `Restaurar subfolders`, actívalo en caso de que los hayas personalizado antes.
 
 𝟯. Finalmente da clic en el botón `Restaurar`. Volverá a aparecer la pequeña ventana de espera, posteriormente la notificación en el escritorio de que se ha completado y listo, tus carpetas vuelven a ser normales.
 
@@ -111,8 +111,8 @@ Dando click en el botón superior de Info, aparecerá una nueva ventana en la qu
 
 * No puedes personalizar carpetas especiales que ya tengan un icono del sistema, como por ejemplo _Documentos_ o _Imágenes_, solo los directorios dentro del mismo.
 * Hay carpetas a las que no se les puede cambiar el icono debido a su nivel de protección o privilegios, por lo tanto se mostrará una notificación en el escritorio avisando sobre cuántas se han omitido.
-* Modifica directamente el archivo Desktop.ini, evitando así eliminarlo y creando uno nuevo, sin perder información del mismo.
-* Mensaje límite de carpetas, una vez superada la cantidad de 600; para desactivar este mensaje, abre el archivo Config.ini y cambia `Message = true` por `Message = false`.
+* Modifica directamente el archivo Desktop.ini, evitando así eliminarlo y creando uno nuevo sin perder información del mismo.
+* Mensaje límite de carpetas, una vez superada la cantidad de 600; para desactivar este mensaje abre el archivo Config.ini y cambia `Message = true` por `Message = false`.
 
 <br>
 
