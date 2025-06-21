@@ -170,6 +170,10 @@ Message = true
 ## ¿Qué es lo nuevo?
 `Versión 1.2.0` evita que la fecha de modificación de la carpeta cambie al momento de personalizarlas. Y se agregaron un par de mejoras visuales a la ventana **Acerca de**.
 
+`Versión 1.3.1` incluye un parche que evita el cierre de la app cuando los folders no logran agregarse desde las casillas y a su vez, muestra una sugerencia de arrastrarlos y soltarlos.
+
+Tanto el portable como instalable incluyen también un acceso directo a [Custom Folder](https://genesistoxical.github.io/customfolder/).
+
 ## Licencia
 **MIT License**
 

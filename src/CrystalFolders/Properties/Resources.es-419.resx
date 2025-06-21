@@ -223,7 +223,7 @@
     <value> carpetas se han omitido porque no se permite personalizarlas.</value>
   </data>
   <data name="AppToCustomizeFolderIcons" xml:space="preserve">
-    <value>Aplicación para personalizar los iconos de tus carpetas en segundos - v1.2.0</value>
+    <value>Aplicación para personalizar los iconos de tus carpetas en segundos - v1.3.1</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Aceptar</value>
@@ -251,5 +251,8 @@
   </data>
   <data name="OptionsAbout" xml:space="preserve">
     <value>Opciones:</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Ups, no se pueden agregar las carpetas. Por favor, arrástralas y suéltalas en la app.</value>
   </data>
 </root>

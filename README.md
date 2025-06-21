@@ -168,7 +168,11 @@ Message = true
 *You can find all licenses [here](/src/CystalFolders/Docs).*
 
 ## What's new?
-`Version 1.2.0` prevents the folder modification date from changing when customizing them. A couple of visual improvements have been added to **About** window.
+`Version 1.2.0` prevents folder modification date from changing when customizing them. A couple of visual improvements have been added to **About** window.
+
+`Version 1.3.1` includes a patch that prevents the app from closing when folders cannot be added from the checkboxes and in turn, displays a drag-and-drop suggestion.
+
+Both the portable and installable also include a shortcut to [Custom Folder](https://genesistoxical.github.io/customfolder/).
 
 ## License
 **MIT License**

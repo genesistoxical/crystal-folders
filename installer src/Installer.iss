@@ -1,5 +1,5 @@
 ﻿#define MyAppName "Crystal Folders"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.3.1"
 #define MyAppPublisher "Génesis Toxical"
 #define MyAppURL "https://genesistoxical.github.io/crystal-folders/"
 #define MyAppExeName "Crystal Folders.exe"
@@ -8,7 +8,7 @@
 AppId={{96F31E5A-5556-46BB-9EB0-EF511EBEEDA7}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-VersionInfoVersion=1.2.0.6
+VersionInfoVersion=1.3.1.0
 AppPublisher={#MyAppPublisher}
 AppCopyright={#MyAppPublisher} © 2025
 AppPublisherURL={#MyAppURL}
@@ -42,6 +42,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\src\CrystalFolders\bin\Release\*"; DestDir: "{app}"; Excludes: "Folders, *.ini"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\src\CrystalFolders\bin\Release\Config.ini"; DestDir: "{userappdata}\{#MyAppName}"; Flags: ignoreversion
 Source: "..\src\CrystalFolders\bin\Release\Folders\*"; DestDir: "{userappdata}\{#MyAppName}\Folders"; Flags: ignoreversion
+Source: "Custom 📂 Folder.url"; DestDir: "{userdesktop}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

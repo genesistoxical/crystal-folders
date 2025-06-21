@@ -226,7 +226,7 @@
     <value> folders have been skipped because customization is not allowed.</value>
   </data>
   <data name="AppToCustomizeFolderIcons" xml:space="preserve">
-    <value>Application to customize your folder icons in a few seconds - v1.2.0</value>
+    <value>Application to customize your folder icons in a few seconds - v1.3.1</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -251,5 +251,8 @@
   </data>
   <data name="OptionsAbout" xml:space="preserve">
     <value>Options:</value>
+  </data>
+  <data name="Oops" xml:space="preserve">
+    <value>Oops, folders can't be added. Please drag and drop them into the app.</value>
   </data>
 </root>

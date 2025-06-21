@@ -86,50 +86,60 @@ namespace CrystalFolders
 
         private void CheckBoxes(string primary, bool addrem)
         {
-            // Lista de directorios para el folder especificado
-            string[] directories = Directory.GetDirectories(userPath + @"\" + primary + @"\", "*");
-
-            // Para cada directorio en la lista de directorios...
-            foreach (string directory in directories)
+            try // try catch como solución temporal al error "la app crashea"
             {
-                // Crear una ruta corta del directorio (..\Documentos)
-                string path = directory.Replace(userPath + @"\", @"..\");
-
-                // Si el folder no está oculto...
-                if (!((File.GetAttributes(directory) & FileAttributes.Hidden) == FileAttributes.Hidden))
+                // Lista de directorios para el folder especificado
+                string[] directories = Directory.GetDirectories(userPath + @"\" + primary + @"\", "*");
+                // Para cada directorio en la lista de directorios...
+                foreach (string directory in directories)
                 {
-                    // Agregar o remover las rutas de la folderList
-                    if (addrem)
-                    {
-                        if (!folderList.Contains(path))
-                        {
-                            folderList.Add(path);
-                        }
-                    }
-                    else
-                    {
-                        folderList.Remove(path);
+                    // Crear una ruta corta del directorio (..\Documentos)
+                    string path = directory.Replace(userPath + @"\", @"..\");
 
-                        if (SlideSub.IsChecked == true)
+                    // Si el folder no está oculto...
+                    if (!((File.GetAttributes(directory) & FileAttributes.Hidden) == FileAttributes.Hidden))
+                    {
+                        // Agregar o remover las rutas de la folderList
+                        if (addrem)
                         {
-                            RemoveSubFolders(directory);
+                            if (!folderList.Contains(path))
+                            {
+                                folderList.Add(path);
+                            }
+                        }
+                        else
+                        {
+                            folderList.Remove(path);
+
+                            if (SlideSub.IsChecked == true)
+                            {
+                                RemoveSubFolders(directory);
+                            }
                         }
                     }
                 }
+
+                // Agregar subfolders si se activa la opción
+                if (SlideSub.IsChecked == true)
+                {
+                    AddSubFolders();
+                }
+
+                NCount();
+
+                // Si la opción de configurar a portable está activada, desactivarla
+                if (addrem && SlidePortable.IsChecked == true)
+                {
+                    SlidePortable.IsChecked = false;
+                }
             }
-
-            // Agregar subfolders si se activa la opción
-            if (SlideSub.IsChecked == true)
+            catch
             {
-                AddSubFolders();
-            }
-
-            NCount();
-
-            // Si la opción de configurar a portable está activada, desactivarla
-            if (addrem && SlidePortable.IsChecked == true)
-            {
-                SlidePortable.IsChecked = false;
+                if (addrem)
+                {
+                    // Mensaje de que no se han podido agregar carpetas
+                    Growl.InfoGlobal(Properties.Resources.Oops);
+                }
             }
         }
 

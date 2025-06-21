@@ -97,7 +97,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Application to customize your folder icons in a few seconds - v1.2.0.
+        ///   Busca una cadena traducida similar a Application to customize your folder icons in a few seconds - v1.3.1.
         /// </summary>
         public static string AppToCustomizeFolderIcons {
             get {
@@ -300,6 +300,15 @@ namespace CrystalFolders.Properties {
         public static string OnlyAllowsLessThan30Folders {
             get {
                 return ResourceManager.GetString("OnlyAllowsLessThan30Folders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Oops, folders can&apos;t be added. Please drag and drop them into the app..
+        /// </summary>
+        public static string Oops {
+            get {
+                return ResourceManager.GetString("Oops", resourceCulture);
             }
         }
         
