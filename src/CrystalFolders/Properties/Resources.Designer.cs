@@ -97,7 +97,7 @@ namespace CrystalFolders.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Application to customize your folder icons in a few seconds - v1.3.1.
+        ///   Busca una cadena traducida similar a Application to customize your folder icons in a few seconds.
         /// </summary>
         public static string AppToCustomizeFolderIcons {
             get {
@@ -399,6 +399,15 @@ namespace CrystalFolders.Properties {
         public static string ustomize {
             get {
                 return ResourceManager.GetString("ustomize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 1.3.4.
+        /// </summary>
+        public static string Ver {
+            get {
+                return ResourceManager.GetString("Ver", resourceCulture);
             }
         }
         

@@ -19,7 +19,7 @@ Crystal Folders is an app to customize your folder icons in a few seconds, for W
 * Adaptive corners (rounded or metro), depending on the OS version.
 
 ## Preview
-<picture><img alt="Crystal Folders customize folders app" src="assets/Crystal-Folders-App.gif"/></picture>
+<picture><img alt="Crystal Folders customize folders app" src="assets/Crystal-Folders.gif"/></picture>
 
 ## Usage
 On the left panel there is an area where the directories or folder list to customize will be displayed. Below you'll find icons with their respective checkboxes, which are: Documents, Pictures, Music, Videos and Desktop.
@@ -65,7 +65,7 @@ Remember, to clear the list or chosen options just click on **⟳**.
 
 <br/>
 
-<picture><img src="assets/Cystal-Folders-Usage.gif"/></picture>
+<video controls><source src="https://github.com/user-attachments/assets/73cf3966-5187-4815-a3ec-11620f39fc35" type="video/mp4"></video>
 
 <br id="details"/>
 
@@ -89,7 +89,7 @@ Click on the upper Info button, a new window will appear where you can:
 
 <br/>
 
-<picture><img src="assets/Cystal-Folders-Options.gif"/></picture>
+<picture><img src="assets/Folders.gif"/></picture>
 
 <br/>
 
@@ -104,8 +104,8 @@ Click on the upper Info button, a new window will appear where you can:
 
 ## Info
 * This software is under **MIT License** ([read full text](https://github.com/genesistoxical/cystal-folders/blob/master/LICENSE){:target="_blank"}).
-* `🤍 Pixie Folders` Create your own folders with this set of six editable icons: [Download](https://genesistoxical.github.io/pixie-folders/){:target="_blank"}.
-* `🤍 Image to Icon` Convert image to icon online: [imagetoicon.glitch.me](https://imagetoicon.glitch.me/){:target="_blank"}.
+* `🤍 Custom Folder` Create your own custom icon folder: [genesistoxical.github.io/customfolder](https://genesistoxical.github.io/customfolder/){:target="_blank"}.
+* `🤍 Image to Icon` Convert image to icon online: [genesistoxical.github.io/imagetoicon](https://genesistoxical.github.io/imagetoicon/){:target="_blank"}.
 * `🤍 Drop Icons` App to convert images to icons (.ico) for Windows: [Download](https://genesistoxical.github.io/drop-icons/){:target="_blank"}.
 * Copyright (c) 2025 Génesis Toxical.
 

@@ -567,9 +567,16 @@ namespace CrystalFolders
                     }
                 }
 
-                // Obtener la fecha de modificación de la carpeta
+                // Obtener la fecha de modificación de la carpeta.
+                // NOTA: Desafortunadamente esto evitará que el caché se
+                // actualice y no mostrará cambios al personalizar las carpetas.
                 DirectoryInfo folderInfo = new DirectoryInfo(fullPath);
                 DateTime modifDate = folderInfo.LastWriteTime;
+
+                // Al agregar un milisegundo extra, el caché de las carpetas SÍ
+                // se actualizará, pero mantendrá la fecha de modificación
+                // prácticamente intacta.
+                modifDate = modifDate.AddMilliseconds(1);
 
                 // Personalizar carpetas
                 ApplyFolderSettings(fullPath);

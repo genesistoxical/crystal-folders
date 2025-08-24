@@ -34,7 +34,7 @@
 * Esquinas adaptables (redondeadas o metro), dependiendo la versión del sistema operativo.
 
 ## Previa
-<a href="#"><img src="docs/assets/Crystal-Folders-App.gif"/></a>
+<a href="#"><img src="docs/assets/Crystal-Folders.gif"/></a>
 
 ## Uso
 En el panel izquierdo hay un área donde se mostrará la lista de directorios o carpetas a personalizar. Más abajo encontrarás iconos con sus respectivas casillas, los cuales son: Documentos, Imágenes, Música, Videos y Escritorio.
@@ -79,7 +79,7 @@ Recuerda, para limpiar la lista o las opciones elegidas basta con hacer clic en 
 
 <br/>
 
-<a href="#"><img src="docs/assets/Cystal-Folders-Usage.gif"/></a>
+https://github.com/user-attachments/assets/73cf3966-5187-4815-a3ec-11620f39fc35
 
 <br id="details"/>
 
@@ -103,7 +103,7 @@ Dando click en el botón superior de Info, aparecerá una nueva ventana en la qu
 
 <br/>
 
-<a href="#"><img src="docs/assets/Cystal-Folders-Options.gif"/></a>
+<a href="#"><img src="docs/assets/Folders.gif"/></a>
 
 <br/>
 
@@ -174,6 +174,8 @@ Message = true
 
 Tanto el portable como instalable incluyen también un acceso directo a [Custom Folder](https://genesistoxical.github.io/customfolder/).
 
+`Versión 1.3.4` se corrigió un bug en el cual a veces el caché no se actualizaba, por lo que no se mostraban cambios al instante o después de un tiempo.
+
 ## Licencia
 **MIT License**
 
@@ -182,8 +184,10 @@ Copyright (c) 2025 Génesis Toxical ([read here](LICENSE)).
 <br>
 
 ## Relacionado:
-`🩷 Drop Icons` Aplicación para convertir imágenes a iconos (.ico) para Windows: [`Descargar`](https://genesistoxical.github.io/drop-icons/) or [`Repositorio`](https://github.com/genesistoxical/drop-icons/).
+`🩷 Custom Folder` Crea tu propia carpeta personalizada: [`genesistoxical.github.io/customfolder`](https://genesistoxical.github.io/customfolder/) o [`Repositorio`](https://github.com/genesistoxical/drop-icons/).
 
-`🩷 Image to Icon` Convertir imagen a icono online: [`imagetoicon.glitch.me`](https://imagetoicon.glitch.me/) o [`Repositorio`](https://github.com/genesistoxical/imagetoicon).
+`🩷 Drop Icons` Aplicación para convertir imágenes a iconos (.ico) para Windows: [`Descargar`](https://genesistoxical.github.io/drop-icons/) o [`Repositorio`](https://github.com/genesistoxical/drop-icons/).
+
+`🩷 Image to Icon` Convertir imagen a icono online: [`genesistoxical.github.io/imagetoicon`](https://genesistoxical.github.io/imagetoicon/) o [`Repositorio`](https://github.com/genesistoxical/imagetoicon).
 
 `🩷 Pixie Folders` Set con seis diseños de iconos de carpetas minimalistas y editables: [`Descargar`](https://genesistoxical.github.io/pixie-folders/) o [`Repositorio`](https://github.com/genesistoxical/pixie-folders).

@@ -5,7 +5,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using HandyControl.Controls;
 
 namespace CrystalFolders
 {
@@ -23,12 +22,13 @@ namespace CrystalFolders
         private void CF_info()
         {
             License.Text = File.ReadAllText(@"Docs\Crystal Folders.txt");
-            Description.Content = Properties.Resources.AppToCustomizeFolderIcons;
+            Description.Content = Properties.Resources.AppToCustomizeFolderIcons + " - v" + Properties.Resources.Ver;
         }
 
         public About()
         {
             InitializeComponent();
+            Description.Content = Properties.Resources.AppToCustomizeFolderIcons + " - v" + Properties.Resources.Ver;
         }
 
         private void Arrows(Label visibleArrw, Label opacityBtn)

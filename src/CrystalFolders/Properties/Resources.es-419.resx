@@ -223,7 +223,7 @@
     <value> carpetas se han omitido porque no se permite personalizarlas.</value>
   </data>
   <data name="AppToCustomizeFolderIcons" xml:space="preserve">
-    <value>Aplicación para personalizar los iconos de tus carpetas en segundos - v1.3.1</value>
+    <value>Aplicación para personalizar los iconos de tus carpetas en segundos</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>Aceptar</value>

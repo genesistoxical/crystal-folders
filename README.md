@@ -34,7 +34,7 @@
 * Adaptive corners (rounded or metro), depending on the OS version.
 
 ## Preview
-<a href="#"><img src="docs/assets/Crystal-Folders-App.gif"/></a>
+<a href="#"><img src="docs/assets/Crystal-Folders.gif"/></a>
 
 ## Usage
 On the left panel there is an area where the directories or folder list to customize will be displayed. Below you'll find icons with their respective checkboxes, which are: Documents, Pictures, Music, Videos and Desktop.
@@ -80,7 +80,7 @@ Remember, to clear the list or chosen options just click on **⟳**.
 
 <br/>
 
-<a href="#"><img src="docs/assets/Cystal-Folders-Usage.gif"/></a>
+https://github.com/user-attachments/assets/73cf3966-5187-4815-a3ec-11620f39fc35
 
 <br id="details"/>
 
@@ -104,7 +104,7 @@ Click on the upper Info button, a new window will appear where you can:
 
 <br/>
 
-<a href="#"><img src="docs/assets/Cystal-Folders-Options.gif"/></a>
+<a href="#"><img src="docs/assets/Folders.gif"/></a>
 
 <br/>
 
@@ -174,6 +174,8 @@ Message = true
 
 Both the portable and installable also include a shortcut to [Custom Folder](https://genesistoxical.github.io/customfolder/).
 
+`Version 1.3.4` fixed a bug where the cache would sometimes not refresh, resulting in changes not being displayed immediately or after a while.
+
 ## License
 **MIT License**
 
@@ -182,8 +184,10 @@ Copyright (c) 2025 Génesis Toxical ([read here](LICENSE)).
 <br>
 
 ## Related:
+`🩷 Custom Folder` Create your own custom icon folder: [`genesistoxical.github.io/customfolder`](https://genesistoxical.github.io/customfolder/) or [`Repository`](https://github.com/genesistoxical/drop-icons/).
+
 `🩷 Drop Icons` Utility to convert images to icons (.ico) for Windows: [`Download`](https://genesistoxical.github.io/drop-icons/) or [`Repository`](https://github.com/genesistoxical/drop-icons/).
 
-`🩷 Image to Icon` Convert image to icon online: [`imagetoicon.glitch.me`](https://imagetoicon.glitch.me/) or [`Repository`](https://github.com/genesistoxical/imagetoicon).
+`🩷 Image to Icon` Convert image to icon online: [`genesistoxical.github.io/imagetoicon`](https://genesistoxical.github.io/imagetoicon/) or [`Repository`](https://github.com/genesistoxical/imagetoicon).
 
 `🩷 Pixie Folders` Set of six minimalist and editable folder icon designs: [`Download`](https://genesistoxical.github.io/pixie-folders/) or [`Repository`](https://github.com/genesistoxical/pixie-folders).
