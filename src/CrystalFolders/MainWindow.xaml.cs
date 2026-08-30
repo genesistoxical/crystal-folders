@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -347,6 +348,7 @@ namespace CrystalFolders
             }
         }
 
+        // Acción de Dropear las folders en la Lista
         private void DropList_Drop(object sender, DragEventArgs e)
         {
             string[] dropFolders = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -355,103 +357,46 @@ namespace CrystalFolders
             // Para cada directorio en los folders arrastrados
             foreach (string directory in dropFolders)
             {
-                // Si es un directorio...
-                if (Directory.Exists(directory))
+                if (!Directory.Exists(directory))
+                    continue;
+                
+                // Obtener la fecha de modificación de la carpeta
+                DirectoryInfo folderInfo = new DirectoryInfo(directory);
+                DateTime modifDate = folderInfo.LastWriteTime;
+
+                // Si el directorio tiene permisos de escritura y modificación
+                // o si no es solo la carperta de usuario
+                if (DirectoryPermissions(directory) && (directory != userPath))
                 {
-                    // Obtener la fecha de modificación de la carpeta
-                    DirectoryInfo folderInfo = new DirectoryInfo(directory);
-                    DateTime modifDate = folderInfo.LastWriteTime;
+                    // Acortar eliminando ruta con nombre de usuario si es que está dentro
+                    string folder = directory.StartsWith($@"{userPath}\", StringComparison.OrdinalIgnoreCase) 
+                        ? directory.Replace($@"{userPath}\", @"..\") 
+                        : directory;
 
-                    // Si el directorio tiene permisos de escritura y modificación
-                    // o si no es solo la carperta de usuario
-                    if (DirectoryPermissions(directory) && (directory != userPath))
-                    {
-                        // Acortar eliminando ruta con nombre de usuario si es que está dentro
-                        string folder;
-                        if (directory.StartsWith(userPath + @"\", StringComparison.OrdinalIgnoreCase))
-                        {
-                            folder = directory.Replace(userPath + @"\", @"..\");
-                        }
-                        else
-                        {
-                            folder = directory;
-                        }
+                    // Evitar que se agreguen carpetas principales del sistema que tienen un icono predeterminado
+                    bool isSpecialFolder = IsProtectedFolder(directory);
 
-                        // Evitar que se agreguen carpetas principales del sistema que tienen un icono predeterminado
-                        bool isSpecialFolder = false;
-                        Environment.SpecialFolder[] protectedFolders = {
-                            Environment.SpecialFolder.MyDocuments, Environment.SpecialFolder.MyPictures,
-                            Environment.SpecialFolder.MyMusic, Environment.SpecialFolder.MyVideos,
-                            Environment.SpecialFolder.Desktop, Environment.SpecialFolder.Favorites,
-                            Environment.SpecialFolder.Recent // Representa Searches y/o Links en entornos viejos/específicos dependiendo SO. Lo ideal es match rudo.
-                        };
-
-                        foreach (var sf in protectedFolders)
-                        {
-                            string sFolderPath = Environment.GetFolderPath(sf);
-                            if (!string.IsNullOrEmpty(sFolderPath) && directory.Equals(sFolderPath, StringComparison.OrdinalIgnoreCase))
-                            {
-                                isSpecialFolder = true;
-                                break;
-                            }
-                        }
-
-                        // También verificar si entra como Contacts, Downloads, 3D Objects, Saved Games (rutas manuales comunes del usuario)
-                        string[] explicitProtections = {
-                            Path.Combine(userPath, "Downloads"),
-                            Path.Combine(userPath, "Contacts"),
-                            Path.Combine(userPath, "Saved Games"),
-                            Path.Combine(userPath, "3D Objects"),
-                            Path.Combine(userPath, "Links"),
-                            Path.Combine(userPath, "Searches")
-                        };
-
-                        foreach (var ep in explicitProtections)
-                        {
-                            if (directory.Equals(ep, StringComparison.OrdinalIgnoreCase))
-                            {
-                                isSpecialFolder = true;
-                                break;
-                            }
-                        }
-
-                        if (isSpecialFolder)
-                        {
-                            warnMssg++;
-                        }
-                        else
-                        {
-                            // Agregar las carpetas a la folderList, si no existen
-                            if (!folderList.Contains(folder))
-                            {
-                                folderList.Add(folder);
-                            }
-                        }
-
-                        // Si está activada la opción de subcarpetas, agregarlas
-                        if (SlideSub.IsChecked == true)
-                        {
-                            AddSubFolders();
-                        }
-                    }
-                    else
-                    {
+                    if (isSpecialFolder)
                         warnMssg++;
-                    }
+                    // Agregar las carpetas a la folderList, si no estaban ya
+                    else if (!folderList.Contains(folder))
+                        folderList.Add(folder);
 
-                    try
-                    {
-                        // Regresar la fecha de modificación de la carpeta
-                        Directory.SetLastWriteTime(directory, modifDate);
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Folder LastWriteTime Error: " + directory);
-                    }
+                    // Si está activada la opción de subcarpetas, agregarlas
+                    if (SlideSub.IsChecked == true) 
+                        AddSubFolders();
                 }
                 else
+                    warnMssg++;
+
+                try
                 {
-                    // Do nothing
+                    // Regresar la fecha de modificación de la carpeta
+                    Directory.SetLastWriteTime(directory, modifDate);
+                }
+                catch
+                {
+                    Console.WriteLine($"Folder LastWriteTime Error: {directory}");
                 }
             }
 
@@ -505,11 +450,9 @@ namespace CrystalFolders
             CBtn_Text.Text = Properties.Resources.estore;
             LabelSub.Content = Properties.Resources.RestoreSubfolders;
             LabelPortable.Content = Properties.Resources.RestoreFromPortable;
-            if (Icon_border.Visibility == Visibility.Hidden)
-            {
-                Icon_border.Visibility = Visibility.Visible;
-                Icon_cross.Visibility = Visibility.Visible;
-            }
+            
+            // Mostrar el icono de Restaurar
+            Icon_border.Visibility = Visibility.Visible;
             Icon_cross.Visibility = Visibility.Hidden;
             Iconpic.Source = (ImageSource)Application.Current.Resources["Restore-icon"];
             NCount();
@@ -518,15 +461,14 @@ namespace CrystalFolders
         private async void Customize_Click(object sender, RoutedEventArgs e)
         {
             // Si no se ha elegido icono o no se restaurará, regresar
-            if (icoPath == null && isRestore == false)
-            {
+            if (icoPath == null && !isRestore)
                 return;
-            }
-            else if (Dot.Value > 600 && Config.message)
+
+            if (Dot.Value > 600 && Config.message)
             {
                 // Mensaje de confirmación para más de 600 carpetas, el contenido
                 // de los botones está invertido debido al color e importancia.
-                var mssg = HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
+                MessageBoxResult msg = HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
                 {
                     Caption = Properties.Resources.TooManyFolders,
                     Message = Properties.Resources.ThereAreMoreThan600Folders,
@@ -537,13 +479,11 @@ namespace CrystalFolders
                     NoContent = Properties.Resources.Yes
                 });
 
-                if (mssg == MessageBoxResult.Yes)
-                {
+                if (msg == MessageBoxResult.Yes)
                     return;
-                }
             }
 
-            WaitDialog wait = new WaitDialog() { Owner = this };
+            WaitDialog wait = new WaitDialog { Owner = this };
 
             // Evita que salga Wait antes del mensaje límite en portables
             if (!isPortable)
@@ -554,82 +494,69 @@ namespace CrystalFolders
 
             // Si la opción de subcarpetas está activada, agregarlas a la folderList principal
             if (SlideSub.IsChecked == true)
-            {
-                foreach (string directory in subfolderList)
-                {
+                foreach (string directory in subfolderList) 
                     folderList.Add(directory);
-                }
-            }
 
             // En caso de que sea portable, se hace una copia de la ruta del icono y se modifica icoPath
-            string icoPathBackup = "";
-
+            string icoPathBackup = isPortable ? icoPath : "";
+            icoPath = isPortable ? $"CF_Icon {Path.GetFileName(icoPath)}" : icoPath;
+            
+            // Cuidao con + de 30 folders, mensaje de error y atpc
+            if (isPortable && Dot.Value > 30)
+            {
+                _ = HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
+                {
+                    Caption = Properties.Resources.TooManyFolders,
+                    Message = Properties.Resources.OnlyAllowsLessThan30Folders,
+                    IconBrushKey = ResourceToken.PrimaryBrush,
+                    IconKey = ResourceToken.WarningGeometry,
+                    Button = MessageBoxButton.OK,
+                    ConfirmContent = Properties.Resources.OK,
+                });
+                return;
+            }
+            
             if (isPortable)
             {
-                icoPathBackup = icoPath;
-                icoPath = "CF_Icon " + Path.GetFileName(icoPath);
-                if (Dot.Value > 30)
-                {
-                    _ = HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
-                    {
-                        Caption = Properties.Resources.TooManyFolders,
-                        Message = Properties.Resources.OnlyAllowsLessThan30Folders,
-                        IconBrushKey = ResourceToken.PrimaryBrush,
-                        IconKey = ResourceToken.WarningGeometry,
-                        Button = MessageBoxButton.OK,
-                        ConfirmContent = Properties.Resources.OK,
-                    });
-                    return;
-                }
-                else
-                {
-                    wait.Show();
-                    await Task.Delay(1);
-                }
+                wait.Show();
+                await Task.Delay(1);
             }
-
+            
             // Personalizar los folders de la lista principal.
             foreach (string folder in folderList)
             {
                 // Reconstruir la ruta absoluta (relativa o ya absoluta)
-                string fullPath;
-                if (folder.StartsWith(@"..\"))
-                {
-                    fullPath = folder.Replace(@"..\", userPath + @"\") + @"\";
-                }
-                else
-                {
-                    fullPath = folder + @"\";
-                }
+                string fullPath = folder.StartsWith(@"..\")
+                    ? $@"{folder.Replace(@"..\", $@"{userPath}\")}\" 
+                    : $@"{folder}\";
 
                 // Si el switch de Portable está activado...
                 if (isPortable)
                 {
-                    if (!isRestore)
-                    {
-                        // Copiar el icono y agregarle el atributo de oculto
-                        try
-                        {
-                            File.Copy(icoPathBackup, fullPath + icoPath);
-                        }
-                        catch
-                        {
-                            File.Delete(fullPath + icoPath);
-                            File.Copy(icoPathBackup, fullPath + icoPath);
-                        }
-                        File.SetAttributes(Path.Combine(fullPath + icoPath), File.GetAttributes(icoPathBackup) | FileAttributes.Hidden);
-                    }
-                    else
+                    if (isRestore)
                     {
                         // Si se restaura, borrar cualquier icono que se haya copiado anteriormente
                         string[] files = Directory.GetFiles(fullPath);
                         foreach (string file in files)
-                        {
-                            if (file.Contains("CF_Icon"))
-                            {
+                            if (file.Contains("CF_Icon")) 
                                 File.Delete(file);
-                            }
+                    }
+                    else
+                    {
+                        // Copiar el icono y agregarle el atributo de oculto
+                        string portableIcoPath = $"{fullPath}{icoPath}";
+                        try
+                        {
+                            File.Copy(icoPathBackup, portableIcoPath);
                         }
+                        catch
+                        {
+                            File.Delete(portableIcoPath);
+                            File.Copy(icoPathBackup, portableIcoPath);
+                        }
+
+                        File.SetAttributes(Path.Combine(portableIcoPath),
+                            File.GetAttributes(icoPathBackup) | FileAttributes.Hidden);
                     }
                 }
 
@@ -654,20 +581,14 @@ namespace CrystalFolders
                 }
                 catch
                 {
-                    Console.WriteLine("Folder LastWriteTime Error: " + fullPath);
-
+                    Console.WriteLine($"Folder LastWriteTime Error: {fullPath}");
                 }
             }
 
             // Growl message dependiendo de si se han personalizado o restaurado
-            if (!isRestore)
-            {
-                Growl.SuccessGlobal(Properties.Resources.FoldersHaveBeenCustomized);
-            }
-            else
-            {
-                Growl.SuccessGlobal(Properties.Resources.FoldersHaveBeenRestored);
-            }
+            Growl.SuccessGlobal(isRestore
+                ? Properties.Resources.FoldersHaveBeenRestored
+                : Properties.Resources.FoldersHaveBeenCustomized);
 
             Clear();
             wait.Close();
@@ -684,15 +605,9 @@ namespace CrystalFolders
                 // Eliminar las subcarpetas también, si el switch está activado
                 if (SlideSub.IsChecked == true)
                 {
-                    string directory;
-                    if (selected.StartsWith(@"..\"))
-                    {
-                        directory = selected.Replace(@"..\", userPath + @"\");
-                    }
-                    else
-                    {
-                        directory = selected;
-                    }
+                    string directory = selected.StartsWith(@"..\")
+                        ? selected.Replace(@"..\", $@"{userPath}\")
+                        : selected;
                     RemoveSubFolders(directory);
                 }
 
@@ -704,10 +619,8 @@ namespace CrystalFolders
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (Cursor != Cursors.AppStarting)
-                {
+                if (Cursor != Cursors.AppStarting) 
                     Cursor = Cursors.AppStarting;
-                }
             });
 
             await Task.Delay(1);
@@ -715,10 +628,8 @@ namespace CrystalFolders
 
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (Cursor != Cursors.Arrow)
-                {
+                if (Cursor != Cursors.Arrow) 
                     Cursor = Cursors.Arrow;
-                }
             });
         }
 
@@ -729,30 +640,23 @@ namespace CrystalFolders
             NCount();
         }
 
-        private void SlidePortable_Checked(object sender, RoutedEventArgs e)
-        {
-            isPortable = true;
-        }
+        private void SlidePortable_Checked(object sender, RoutedEventArgs e) => isPortable = true;
+        private void SlidePortable_Unchecked(object sender, RoutedEventArgs e) => isPortable = false;
 
-        private void SlidePortable_Unchecked(object sender, RoutedEventArgs e)
-        {
-            isPortable = false;
-        }
-
+        private bool AnySpecialFolderChecked => 
+            Documents.IsChecked == true || Pictures.IsChecked == true || Music.IsChecked == true
+            || Videos.IsChecked == true || Desktop.IsChecked == true;
+        
         private void SlidePortable_Click(object sender, RoutedEventArgs e)
         {
             // Evitar que se active la opción portable si se han activado carpetas especiales
-            if (Documents.IsChecked == true || Pictures.IsChecked == true || Music.IsChecked == true
-                || Videos.IsChecked == true || Desktop.IsChecked == true)
-            {
+            if (AnySpecialFolderChecked)
                 SlidePortable.IsChecked = false;
-                return;
-            }
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            HelpDialog dlgextract = new HelpDialog() { Owner = this };
+            HelpDialog dlgextract = new HelpDialog { Owner = this };
             dlgextract.ShowDialog();
         }
 
@@ -762,14 +666,11 @@ namespace CrystalFolders
             Close();
         }
 
-        private void ClearList_Click(object sender, RoutedEventArgs e)
-        {
-            Clear();
-        }
+        private void ClearList_Click(object sender, RoutedEventArgs e) => Clear();
 
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            About dlgextract = new About() { Owner = this };
+            About dlgextract = new About { Owner = this };
             dlgextract.Show();
         }
 
@@ -777,16 +678,46 @@ namespace CrystalFolders
         {
             // Cambiar de posición el texto dependiendo del idioma
             if (!isRestore)
-            {
-                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 266, 88, 0)
+                Dotsub.Margin = Config.currentLan == "en"
+                    ? new Thickness(476, 266, 88, 0)
                     : new Thickness(478, 266, 88, 0);
-            }
             else
-            {
-                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 266, 88, 0)
+                Dotsub.Margin = Config.currentLan == "en"
+                    ? new Thickness(476, 266, 88, 0)
                     : new Thickness(494, 266, 88, 0);
-            }
 
         }
+        
+        #region PROTECTED FOLDERS
+
+        // Carpetas Protegidas por Windows a las que no se le puede cambiar el Icono
+        private static readonly Environment.SpecialFolder[] ProtectedFolders = {
+            Environment.SpecialFolder.MyDocuments, Environment.SpecialFolder.MyPictures,
+            Environment.SpecialFolder.MyMusic, Environment.SpecialFolder.MyVideos,
+            Environment.SpecialFolder.Desktop, Environment.SpecialFolder.Favorites,
+            Environment.SpecialFolder.Recent // Representa Searches y/o Links en entornos viejos/específicos dependiendo SO. Lo ideal es match rudo.
+        };
+
+        // Otras Carpetas más concretas que vamos a ignorar a la hora de cambiar iconos porque son mas propias de Windows
+        // (Que te jodan Microsoft!!)
+        private static readonly string[] OtherProtectedFolders =
+        {
+            Path.Combine(userPath, "Downloads"),
+            Path.Combine(userPath, "Contacts"),
+            Path.Combine(userPath, "Saved Games"),
+            Path.Combine(userPath, "3D Objects"),
+            Path.Combine(userPath, "Links"),
+            Path.Combine(userPath, "Searches")
+        };
+        
+        private static bool IsProtectedFolder(string dirPath) =>
+            ProtectedFolders
+                .Select(Environment.GetFolderPath)
+                .Any(sFolderPath => 
+                    !string.IsNullOrEmpty(sFolderPath) 
+                    && dirPath.Equals(sFolderPath, StringComparison.OrdinalIgnoreCase))
+            || OtherProtectedFolders.Any(ep => dirPath.Equals(ep, StringComparison.OrdinalIgnoreCase)); 
+        
+        #endregion
     }
 }
