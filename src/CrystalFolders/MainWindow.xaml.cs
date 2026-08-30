@@ -40,31 +40,6 @@ namespace CrystalFolders
             userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         }
 
-        public void ApplyFolderSettings(string folderPath)
-        {
-            Icons.SHFOLDERCUSTOMSETTINGS customSettings = new Icons.SHFOLDERCUSTOMSETTINGS
-            {
-                dwMask = 0x10
-            };
-
-            // Poner un icono o quitarlo
-            if (!isRestore)
-            {
-                customSettings.pszIconFile = icoPath;
-                customSettings.iIconIndex = 0;
-            }
-            else
-            {
-                // pszIconFile and iIconIndex empty
-                // pszIconFile y iIconIndex vacíos
-            }
-
-            uint FCS_FORCEWRITE = 0x00000002;
-
-            // Aplicar la configuración al Desktop.ini
-            Icons.SHGetSetFolderCustomSettings(ref customSettings, folderPath, FCS_FORCEWRITE);
-        }
-
         public bool DirectoryPermissions(string directory)
         {
             // Una opción simple para saber si el directorio tiene permisos de escritura y
@@ -366,7 +341,7 @@ namespace CrystalFolders
 
                 // Si el directorio tiene permisos de escritura y modificación
                 // o si no es solo la carperta de usuario
-                if (DirectoryPermissions(directory) && (directory != userPath))
+                if (DirectoryPermissions(directory) && directory != userPath)
                 {
                     // Acortar eliminando ruta con nombre de usuario si es que está dentro
                     string folder = directory.StartsWith($@"{userPath}\", StringComparison.OrdinalIgnoreCase) 
@@ -572,7 +547,7 @@ namespace CrystalFolders
                 modifDate = modifDate.AddMilliseconds(1);
 
                 // Personalizar carpetas
-                ApplyFolderSettings(fullPath);
+                Icons.ConfigureIconToFolder(fullPath, isRestore ? "" : icoPath);
 
                 try
                 {
@@ -719,5 +694,8 @@ namespace CrystalFolders
             || OtherProtectedFolders.Any(ep => dirPath.Equals(ep, StringComparison.OrdinalIgnoreCase)); 
         
         #endregion
+        
+        
+        
     }
 }
