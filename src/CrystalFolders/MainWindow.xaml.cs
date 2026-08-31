@@ -952,7 +952,7 @@ namespace CrystalFolders
 
                 if (info.HasConfiguredIcon)
                     return MainWindow.LoadResourceIcon(
-                        info.HasPortableIconInside
+                        info.ConfiguredIconIsInside
                             ? "snail.png"
                             : "link.png");
                 
