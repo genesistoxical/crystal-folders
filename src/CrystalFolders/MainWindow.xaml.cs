@@ -18,6 +18,8 @@ using System.Windows.Interop;
 using System.Globalization;
 using System.Windows.Data;
 using System.Runtime.InteropServices;
+using CrystalFolders.Properties;
+using Brushes = System.Windows.Media.Brushes;
 using Path = System.IO.Path;
 
 namespace CrystalFolders
@@ -29,7 +31,7 @@ namespace CrystalFolders
         /// </summary>
 
         public static string icoPath, userPath;
-        public static bool isPortable = false, isRestore = false;
+        public static bool isPortable, isRestore, isApplyingPortable;
         public static ObservableCollection<string> folderList;
         public static List<string> subfolderList, ignore;
 
@@ -295,6 +297,7 @@ namespace CrystalFolders
             subfolderList.Clear();
             icoPath = null;
             isRestore = false;
+            isApplyingPortable = false;
             Iconpic.Source = null;
             CBtn_Letter.Text = Properties.Resources.C;
             CBtn_Text.Text = Properties.Resources.ustomize;
@@ -491,6 +494,9 @@ namespace CrystalFolders
             NCount();
         }
 
+        
+        #region ACTION BUTTONS
+
         private void ChooseBtn_Click(object sender, RoutedEventArgs e)
         {
             string initialDir = Config.isIntalled ? Config.appData + "\\Folders" : AppDomain.CurrentDomain.BaseDirectory + @"Folders";
@@ -541,10 +547,36 @@ namespace CrystalFolders
             NCount();
         }
 
+        private void AutoApplyBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // No Folder that has icon inside
+            if (!folderList.Any(folder => Icons.AnalyzeFolder(folder).HasIconFileInside))
+                return;
+            
+            isApplyingPortable = true;
+            // isApplyingPortable es una variable estática, por lo que WPF no
+            // vuelve a evaluar automáticamente el converter del FontWeight.
+            DropList.Items.Refresh();
+            CBtn_Letter.Text = "A";
+            CBtn_Text.Text = Properties.Resources.pply;
+            LabelSub.Content = Properties.Resources.ApplySubfolders;
+            LabelPortable.Content = Properties.Resources.ConfigureAsPortable;
+            
+            // Mostrar el icono de Portable (caracol)
+            Icon_border.Visibility = Visibility.Visible;
+            Icon_cross.Visibility = Visibility.Hidden;
+            Iconpic.Source = (ImageSource)Application.Current.Resources["snail"];
+            
+            NCount();
+        }
+
+        #endregion
+        
+
         private async void Customize_Click(object sender, RoutedEventArgs e)
         {
             // Si no se ha elegido icono o no se restaurará, regresar
-            if (icoPath == null && !isRestore)
+            if (icoPath == null && !isRestore && !isApplyingPortable)
                 return;
 
             if (Dot.Value > 600 && Config.message)
@@ -587,7 +619,7 @@ namespace CrystalFolders
             // Cuidao con + de 30 folders, mensaje de error y atpc
             if (isPortable && Dot.Value > 30)
             {
-                _ = HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
+                HandyControl.Controls.MessageBox.Show(new MessageBoxInfo
                 {
                     Caption = Properties.Resources.TooManyFolders,
                     Message = Properties.Resources.OnlyAllowsLessThan30Folders,
@@ -641,6 +673,38 @@ namespace CrystalFolders
                         File.SetAttributes(Path.Combine(portableIcoPath),
                             File.GetAttributes(icoPathBackup) | FileAttributes.Hidden);
                     }
+                }
+                
+                if (isApplyingPortable)
+                {
+                    Icons.FolderIconInfo info = Icons.AnalyzeFolder(folder);
+                    if (!info.HasIconFileInside)
+                        continue;
+                    
+                    if (!info.HasPortableIconInside)
+                    {
+                        // Copiar el icono y agregarle el atributo de oculto
+                        string baseIconPath = info.FirstIconInsidePath;
+                        string portableIconPath = Icons.IconToPortableIcon(info.FirstIconInsidePath);
+                        Console.WriteLine(portableIconPath);
+                        try
+                        {
+                            File.Copy(baseIconPath, portableIconPath);
+                            File.Delete(baseIconPath);
+                            info.PortableIconPath = portableIconPath;
+                            info.FirstIconInsidePath = portableIconPath;
+                        }
+                        catch
+                        {
+                            File.Delete(portableIconPath);
+                            File.Copy(baseIconPath, portableIconPath);
+                            File.Delete(baseIconPath);
+                            info.PortableIconPath = portableIconPath;
+                            info.FirstIconInsidePath = portableIconPath;
+                        }
+                    }
+
+                    icoPath = info.PortableIconPath;
                 }
 
                 // Obtener la fecha de modificación de la carpeta.
@@ -806,6 +870,31 @@ namespace CrystalFolders
         
         
     }
+
+    #region FOLDER PATH STYLE
+
+    public sealed class PathFontWeightConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!MainWindow.isApplyingPortable) return Brushes.Black;
+            
+            string folderPath = MainWindow.ResolveFolderPath(value as string);
+            Icons.FolderIconInfo info = Icons.AnalyzeFolder(folderPath);
+            
+            return info.HasPortableIconInside
+                ? Brushes.Black
+                : info.HasIconFileInside
+                    ? Brushes.DarkSlateBlue
+                    : Brushes.LightGray;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+
+    #endregion
+    
     
     #region Folder State Icons
 
@@ -916,9 +1005,9 @@ namespace CrystalFolders
                 Icons.FolderIconInfo info = Icons.AnalyzeFolder(folderPath);
                 return info.HasConfiguredIcon
                     ? info.HasPortableIconInside
-                        ? $"Icono Portable dentro de la Carpeta: {Path.GetFileName(info.PortableIconPath)}" 
-                        : $"Icono Externo (no portable): {Path.GetFileName(info.ConfiguredIconPath)}"
-                    : $"Icono dentro de la Carpeta: {Path.GetFileName(info.HasPortableIconInside ? info.PortableIconPath : info.FirstIconInsidePath)}";
+                        ? $"{Resources.PortableOnFolderToolTip}: {Path.GetFileName(info.ConfiguredIconPath)}" 
+                        : $"{Resources.ExternalIconTooltip}: {Path.GetFileName(info.ConfiguredIconPath)}"
+                    : $"{Resources.IconOnFolderToolTip}: {Path.GetFileName(info.HasPortableIconInside ? info.PortableIconPath : info.FirstIconInsidePath)}";
             }
             catch
             {

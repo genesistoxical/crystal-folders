@@ -35,6 +35,7 @@
             <local:FolderStateIconConverter x:Key="FolderStateIconConverter" />
             <local:IconLocationIconConverter x:Key="IconLocationIconConverter" />
             <local:LeadingEllipsisConverter x:Key="LeadingEllipsisConverter" />
+            <local:PathFontWeightConverter x:Key="PathFontWeightConverter" />
             <local:FolderStateTooltipConverter x:Key="FolderStateTooltipConverter" />
             <local:IconLocationTooltipConverter x:Key="IconLocationTooltipConverter" />
         </Grid.Resources>
@@ -102,6 +103,7 @@
                         </Grid.ColumnDefinitions>
                         <!--  Path de la Carpeta  -->
                         <TextBlock
+                            Foreground="{Binding Converter={StaticResource PathFontWeightConverter}}"
                             Grid.Column="2"
                             Text="{Binding Converter={StaticResource LeadingEllipsisConverter}}"
                             ToolTip="{Binding}"
@@ -256,7 +258,7 @@
             Height="24"
             HorizontalAlignment="Left"
             IsManipulationEnabled="True"
-            Margin="296,98,0,0"
+            Margin="296,70,0,0"
             Padding="10,-2,10,1"
             VerticalAlignment="Top"
             Width="107"
@@ -272,11 +274,27 @@
             Height="24"
             HorizontalAlignment="Left"
             IsManipulationEnabled="True"
-            Margin="296,142,0,0"
+            Margin="296,122,0,0"
             Padding="10,-2,10,1"
             VerticalAlignment="Top"
             Width="107"
             x:Name="RestoreBtn" />
+        <Button
+            Background="#FFF5F5F9"
+            BorderBrush="{DynamicResource Border}"
+            BorderThickness="1"
+            Click="AutoApplyBtn_Click"
+            Content="{x:Static properties:Resources.AutoApply}"
+            FontSize="11"
+            Foreground="#FF383838"
+            Height="24"
+            HorizontalAlignment="Left"
+            IsManipulationEnabled="True"
+            Margin="296,175,0,0"
+            Padding="10,-2,10,1"
+            VerticalAlignment="Top"
+            Width="107"
+            x:Name="AutoApply" />
         <Rectangle
             Fill="{DynamicResource Primary}"
             Height="24"
@@ -403,14 +421,21 @@
             BorderBrush="#FF000000"
             CornerRadius="0,0,3,1.5"
             HorizontalAlignment="Left"
-            Margin="322,166,0,308"
+            Margin="322,146,0,328"
             Width="55" />
         <Border
             Background="{DynamicResource Primary}"
             BorderBrush="#FF000000"
             CornerRadius="0,0,3,1.5"
             HorizontalAlignment="Left"
-            Margin="322,122,0,352"
+            Margin="322,199,0,275"
+            Width="55" />
+        <Border
+            Background="{DynamicResource Primary}"
+            BorderBrush="#FF000000"
+            CornerRadius="0,0,3,1.5"
+            HorizontalAlignment="Left"
+            Margin="322,94,0,380"
             Width="55" />
         <Button
             Background="#FF888888"
