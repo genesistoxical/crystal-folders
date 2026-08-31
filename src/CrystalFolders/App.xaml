@@ -17,6 +17,7 @@
             <SolidColorBrush x:Key="Background" Color="#FFF1F1F7"/>
             <SolidColorBrush x:Key="Border" Color="#FFC9CBE2"/>
             <BitmapImage x:Key="Restore-icon" UriSource="Resources/restore-icon.png"/>
+            <BitmapImage x:Key="folder-automation" UriSource="Resources/folder-automation.png"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

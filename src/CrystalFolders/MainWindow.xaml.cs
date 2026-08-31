@@ -565,7 +565,7 @@ namespace CrystalFolders
             // Mostrar el icono de Portable (caracol)
             Icon_border.Visibility = Visibility.Visible;
             Icon_cross.Visibility = Visibility.Hidden;
-            Iconpic.Source = (ImageSource)Application.Current.Resources["snail"];
+            Iconpic.Source = (ImageSource)Application.Current.Resources["folder-automation"];
             
             NCount();
         }
