@@ -257,6 +257,13 @@
     <Resource Include="Resources\Color.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\folder-custom.png" />
+    <Resource Include="Resources\folder-default-w-icon.png" />
+    <Resource Include="Resources\folder-iconed.png" />
+    <Resource Include="Resources\folder-protected.png" />
+    <Resource Include="Resources\snail.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Icon.ico" />
   </ItemGroup>
   <ItemGroup>

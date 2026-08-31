@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -13,6 +14,10 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Interop;
+using System.Globalization;
+using System.Windows.Data;
+using System.Runtime.InteropServices;
 using Path = System.IO.Path;
 
 namespace CrystalFolders
@@ -38,6 +43,76 @@ namespace CrystalFolders
 
             // Obtener la ruta de usuario
             userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        }
+
+        internal static string ResolveFolderPath(string folder)
+        {
+            if (string.IsNullOrWhiteSpace(folder))
+                return folder;
+
+            return folder.StartsWith(@"..\", StringComparison.Ordinal)
+                ? folder.Replace(@"..\", userPath + @"\")
+                : folder;
+        }
+
+        internal static BitmapImage LoadResourceIcon(string name) =>
+            new BitmapImage(new Uri($"pack://application:,,,/Resources/{name}", UriKind.Absolute));
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        private struct ShellFileInfo
+        {
+            public IntPtr IconHandle;
+            public int IconIndex;
+            public uint Attributes;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string DisplayName;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string TypeName;
+        }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        private static extern IntPtr SHGetFileInfo(
+            string path,
+            uint fileAttributes,
+            ref ShellFileInfo fileInfo,
+            uint fileInfoSize,
+            uint flags);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool DestroyIcon(IntPtr iconHandle);
+
+        internal static ImageSource LoadFolderIcon(string folderPath)
+        {
+            ShellFileInfo fileInfo = new ShellFileInfo();
+            const uint SHGFI_ICON = 0x000000100;
+            const uint SHGFI_SMALLICON = 0x000000001;
+
+            if (SHGetFileInfo(
+                    folderPath,
+                    0,
+                    ref fileInfo,
+                    (uint)Marshal.SizeOf<ShellFileInfo>(),
+                    SHGFI_ICON | SHGFI_SMALLICON) == IntPtr.Zero
+                || fileInfo.IconHandle == IntPtr.Zero)
+            {
+                return null;
+            }
+
+            try
+            {
+                ImageSource image = Imaging.CreateBitmapSourceFromHIcon(
+                    fileInfo.IconHandle,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromWidthAndHeight(16, 16));
+                image.Freeze();
+                return image;
+            }
+            finally
+            {
+                DestroyIcon(fileInfo.IconHandle);
+            }
         }
 
         public bool DirectoryPermissions(string directory)
@@ -323,6 +398,24 @@ namespace CrystalFolders
             }
         }
 
+        // Doble Click en la lista
+        private void DropList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Por si clicka fuera de un elemento
+            if (!(DropList.SelectedItem is string selectedFolder))
+                return;
+
+            string folderPath = Path.GetFullPath(ResolveFolderPath(selectedFolder));
+            if (!Directory.Exists(folderPath))
+                return;
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = folderPath,
+                UseShellExecute = true
+            });
+        }
+
         // Acción de Dropear las folders en la Lista
         private void DropList_Drop(object sender, DragEventArgs e)
         {
@@ -349,7 +442,7 @@ namespace CrystalFolders
                         : directory;
 
                     // Evitar que se agreguen carpetas principales del sistema que tienen un icono predeterminado
-                    bool isSpecialFolder = IsProtectedFolder(directory);
+                    bool isSpecialFolder = IsProtectedFolderPath(directory);
 
                     if (isSpecialFolder)
                         warnMssg++;
@@ -373,6 +466,21 @@ namespace CrystalFolders
                 {
                     Console.WriteLine($"Folder LastWriteTime Error: {directory}");
                 }
+                
+                // Sort Order pa que quede bonico
+                string[] sortedFolders = folderList
+                    .OrderBy(folder =>
+                    {
+                        Icons.FolderIconInfo info = Icons.AnalyzeFolder(ResolveFolderPath(folder));
+                        return info.HasConfiguredIcon
+                            ? info.HasIconFileInside ? 0 : 1
+                            : info.HasIconFileInside ? 2 : 3;
+                    })
+                    .ToArray();
+
+                folderList.Clear();
+                foreach (string sortedFolder in sortedFolders)
+                    folderList.Add(sortedFolder);
             }
 
             if (warnMssg > 0)
@@ -675,7 +783,7 @@ namespace CrystalFolders
 
         // Otras Carpetas más concretas que vamos a ignorar a la hora de cambiar iconos porque son mas propias de Windows
         // (Que te jodan Microsoft!!)
-        private static readonly string[] OtherProtectedFolders =
+        private static string[] OtherProtectedFolders => new[]
         {
             Path.Combine(userPath, "Downloads"),
             Path.Combine(userPath, "Contacts"),
@@ -685,7 +793,7 @@ namespace CrystalFolders
             Path.Combine(userPath, "Searches")
         };
         
-        private static bool IsProtectedFolder(string dirPath) =>
+        internal static bool IsProtectedFolderPath(string dirPath) =>
             ProtectedFolders
                 .Select(Environment.GetFolderPath)
                 .Any(sFolderPath => 
@@ -698,4 +806,129 @@ namespace CrystalFolders
         
         
     }
+    
+    #region Folder State Icons
+
+    // Convierte la ruta de cada folder en una abreviacion con puntos suspensivos delante para que quepa bien y ver el final de la ruta
+    public sealed class LeadingEllipsisConverter : IValueConverter
+    {
+        private const int MaxVisibleCharacters = 24;
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string path = value as string;
+            if (string.IsNullOrEmpty(path) || path.Length <= MaxVisibleCharacters)
+                return path;
+
+            return "..." + path.Substring(path.Length - MaxVisibleCharacters);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+    
+    // Icono de la Carpeta
+    public sealed class FolderStateIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                string folderPath = MainWindow.ResolveFolderPath(value as string);
+                if (MainWindow.IsProtectedFolderPath(folderPath))
+                    return MainWindow.LoadResourceIcon("folder-protected.png");
+
+                return MainWindow.LoadFolderIcon(folderPath);
+            }
+            catch
+            {
+                return MainWindow.LoadResourceIcon("folder-custom.png");
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+
+    // Icono que denota la ubicación del Icono configurado en la carpeta
+    // Portable: Caracol || Externo: Link || No tiene: no se muestra 
+    public sealed class IconLocationIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                string folderPath = MainWindow.ResolveFolderPath(value as string);
+                Icons.FolderIconInfo info = Icons.AnalyzeFolder(folderPath);
+
+                if (info.HasConfiguredIcon)
+                    return MainWindow.LoadResourceIcon(
+                        info.HasPortableIconInside
+                            ? "snail.png"
+                            : "link.png");
+                
+                return info.HasIconFileInside ? MainWindow.LoadResourceIcon("snail.png") : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+    
+    // Tooltip del icono de la carpeta con su ruta
+    public sealed class FolderStateTooltipConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                string folderPath = MainWindow.ResolveFolderPath(value as string);
+                Icons.FolderIconInfo info = Icons.AnalyzeFolder(folderPath);
+
+                return info.HasConfiguredIcon 
+                    ? info.ConfiguredIconIsPortable 
+                        ? $"./{Path.GetFileName(info.PortableIconPath)}"
+                        : info.ConfiguredIconPath 
+                    : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+
+    // Tooltip del Icono de la Ubicación del Icono
+    public sealed class IconLocationTooltipConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                string folderPath = MainWindow.ResolveFolderPath(value as string);
+                Icons.FolderIconInfo info = Icons.AnalyzeFolder(folderPath);
+                return info.HasConfiguredIcon
+                    ? info.HasPortableIconInside
+                        ? $"Icono Portable dentro de la Carpeta: {Path.GetFileName(info.PortableIconPath)}" 
+                        : $"Icono Externo (no portable): {Path.GetFileName(info.ConfiguredIconPath)}"
+                    : $"Icono dentro de la Carpeta: {Path.GetFileName(info.HasPortableIconInside ? info.PortableIconPath : info.FirstIconInsidePath)}";
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            Binding.DoNothing;
+    }
+
+    #endregion
 }

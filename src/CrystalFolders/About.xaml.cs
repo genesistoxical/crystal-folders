@@ -57,20 +57,15 @@ namespace CrystalFolders
         {
             // Elegir el idioma, bordes redondeados y TopMost
             // dependiendo del archivo Config.ini
-            if (Config.currentLan == "es")
-            {
+            if (Config.currentLan == "es") 
                 Lang.Content = Properties.Resources.LanguageEspañol;
-            }
             Config.RoundCorners(Bg, null, Border, null, Deco, null);
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Mover ventana sin bordes
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
+            if (e.LeftButton == MouseButtonState.Pressed) DragMove();
         }
 
         private void Btn_1_MouseDown(object sender, MouseButtonEventArgs e)
@@ -135,62 +130,46 @@ namespace CrystalFolders
         {
             if (Arrw_2.Visibility == Visibility.Visible)
             {
-                switch (Btn_2.Content)
+                _ = Btn_2.Content switch
                 {
-                    case "Noto Music":
-                        _ = Process.Start("https://fonts.google.com/noto/specimen/Noto+Sans");
-                        break;
-                    case "Pixie Folders":
-                        _ = Process.Start("https://genesistoxical.github.io/pixie-folders/");
-                        break;
-                }
+                    "Noto Music" => Process.Start("https://fonts.google.com/noto/specimen/Noto+Sans"),
+                    "Pixie Folders" => Process.Start("https://genesistoxical.github.io/pixie-folders/"),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
             }
             else if (Arrw_Teeny.Visibility == Visibility.Visible)
-            {
                 _ = Process.Start("https://teenyicons.com/");
-            }
             else if (Arrw_Jam.Visibility == Visibility.Visible)
-            {
                 _ = Process.Start("https://jam-icons.com/");
-            }
             else if (Arrw_1.Visibility == Visibility.Visible)
             {
-                switch (Btn_1.Content)
+                _ = Btn_1.Content switch
                 {
-                    case "Crystal Folders":
-                        _ = Process.Start("https://genesistoxical.github.io/crystal-folders/");
-                        break;
-                    case "WinVersion":
-                        _ = Process.Start("https://github.com/shaovoon/win_version_detection");
-                        break;
-                }
+                    "Crystal Folders" => Process.Start("https://genesistoxical.github.io/crystal-folders/"),
+                    "WinVersion" => Process.Start("https://github.com/shaovoon/win_version_detection"),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
             }
             else if (Arrw_Folder.Visibility == Visibility.Visible)
-            {
                 _ = Process.Start("https://github.com/evaristocuesta/FolderBrowserEx");
-            }
             else if (Arrw_Handy.Visibility == Visibility.Visible)
-            {
                 _ = Process.Start("https://github.com/ghost1372/HandyControls");
-            }
-            else if (Arrw_Jam.Visibility == Visibility.Visible)
-            {
+            else if (Arrw_Jam.Visibility == Visibility.Visible) 
                 _ = Process.Start("https://jam-icons.com/");
-            }
         }
 
         private void Caret_Click(object sender, RoutedEventArgs e)
         {
-            string LangText = Lang.Content.ToString();
+            string langText = Lang.Content.ToString();
 
-            switch (LangText)
+            switch (langText)
             {
-                case string _ when LangText.Contains("Español"):
+                case { } when langText.Contains("Español"):
                     Lang.Content = Properties.Resources.LanguageEnglish;
                     Config.selecLan = "en";
                     break;
 
-                case string _ when LangText.Contains("English"):
+                case { } when langText.Contains("English"):
                     Lang.Content = Properties.Resources.LanguageEspañol;
                     Config.selecLan = "es";
                     break;
@@ -199,14 +178,11 @@ namespace CrystalFolders
 
         private void ChangeTheme_Click(object sender, RoutedEventArgs e)
         {
-            Picker dlgextract = new Picker() { Owner = this };
+            Picker dlgextract = new Picker { Owner = this };
             dlgextract.Show();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        private void Back_Click(object sender, RoutedEventArgs e) => Close();
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
@@ -225,7 +201,7 @@ namespace CrystalFolders
                 };
                 updatedMain.Show();
                 updatedMain.Owner = null;
-                ((MainWindow)Application.Current.MainWindow).Close();
+                ((MainWindow)Application.Current.MainWindow)?.Close();
                 Application.Current.MainWindow = updatedMain;
                 Config.restart = false;
             }

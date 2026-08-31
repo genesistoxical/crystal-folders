@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalFolders", "CrystalFolders\CrystalFolders.csproj", "{EE3A8E4D-2C32-466A-8AFF-0024435D27E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrystalFolders.Tests", "CrystalFolders.Tests\CrystalFolders.Tests.csproj", "{A7B0B8C2-3F6F-4F82-9D72-4B57403E2786}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EE3A8E4D-2C32-466A-8AFF-0024435D27E1} = {EE3A8E4D-2C32-466A-8AFF-0024435D27E1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

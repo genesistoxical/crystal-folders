@@ -39,6 +39,8 @@ namespace CrystalFolders
             public bool HasPortableIconInside { get; internal set; }
             public bool HasConfiguredIcon { get; internal set; }
             public string ConfiguredIconPath { get; internal set; }
+            public string FirstIconInsidePath { get; internal set; }
+            public string PortableIconPath { get; set; }
             public bool ConfiguredIconIsInside { get; internal set; }
             public bool ConfiguredIconIsPortable { get; internal set; }
         }
@@ -98,16 +100,27 @@ namespace CrystalFolders
                 .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             string configuredPath = GetFolderIconPath(folderPath);
 
-            FolderIconInfo result = new FolderIconInfo
+            string[] iconsInside = Directory.EnumerateFiles(folderPath, "*.ico", SearchOption.TopDirectoryOnly).ToArray();
+
+            // Info Basica
+            FolderIconInfo info = new FolderIconInfo
             {
-                HasIconFileInside = Directory.EnumerateFiles(folderPath, "*.ico", SearchOption.TopDirectoryOnly).Any(),
-                HasPortableIconInside = Directory.EnumerateFiles(folderPath, "*.ico", SearchOption.TopDirectoryOnly).Any(IconIsPortable),
+                HasIconFileInside = iconsInside.Any(),
+                HasPortableIconInside = iconsInside.Any(IconIsPortable),
                 ConfiguredIconPath = configuredPath,
                 HasConfiguredIcon = !string.IsNullOrWhiteSpace(configuredPath)
             };
+            
+            // Rutas de los Iconos dentro
+            if (info.HasIconFileInside)
+            {
+                info.FirstIconInsidePath = iconsInside.First();
+                if (info.HasPortableIconInside)
+                    info.PortableIconPath = iconsInside.First(IconIsPortable);
+            }
 
-            if (!result.HasConfiguredIcon)
-                return result;
+            if (!info.HasConfiguredIcon)
+                return info;
 
             // Ruta absoluta
             string resolvedPath = Path.IsPathRooted(configuredPath)
@@ -115,11 +128,12 @@ namespace CrystalFolders
                 : Path.GetFullPath(Path.Combine(fullFolderPath, configuredPath));
             string folderPrefix = fullFolderPath + Path.DirectorySeparatorChar;
 
-            result.ConfiguredIconIsInside = resolvedPath.StartsWith(folderPrefix, StringComparison.OrdinalIgnoreCase);
-            result.ConfiguredIconIsPortable = result.ConfiguredIconIsInside
+            // Comprueba si el Icono Configurado esta DENTRO o es EXTERNO
+            info.ConfiguredIconIsInside = resolvedPath.StartsWith(folderPrefix, StringComparison.OrdinalIgnoreCase);
+            info.ConfiguredIconIsPortable = info.ConfiguredIconIsInside
                 && Path.GetFileName(resolvedPath).StartsWith(PortablePrefix, StringComparison.OrdinalIgnoreCase);
 
-            return result;
+            return info;
         }
 
         public static string[] GetIconsPathInside(string dirPath) => 
