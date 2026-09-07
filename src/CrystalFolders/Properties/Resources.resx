@@ -255,6 +255,21 @@
   <data name="Oops" xml:space="preserve">
     <value>Oops, folders can't be added. Please drag and drop them into the app.</value>
   </data>
+  <data name="AutoApply" xml:space="preserve">
+    <value>Apply Portables</value>
+  </data>
+  <data name="PortableOnFolderToolTip" xml:space="preserve">
+    <value>Portable Icon inside Folder</value>
+  </data>
+  <data name="IconOnFolderToolTip" xml:space="preserve">
+    <value>Icon inside Folder</value>
+  </data>
+  <data name="ExternalIconTooltip" xml:space="preserve">
+    <value>External Icon (Non Portable)</value>
+  </data>
+  <data name="ApplySubfolders" xml:space="preserve">
+    <value>Apply Subfolders</value>
+  </data>
   <data name="Ver" xml:space="preserve">
     <value>1.4.0</value>
     <comment>@Invariant</comment>

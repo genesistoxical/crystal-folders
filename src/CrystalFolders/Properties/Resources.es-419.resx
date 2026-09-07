@@ -255,4 +255,19 @@
   <data name="Oops" xml:space="preserve">
     <value>Ups, no se pueden agregar las carpetas. Por favor, arrástralas y suéltalas en la app.</value>
   </data>
+  <data name="AutoApply" xml:space="preserve">
+    <value>Aplicar Portables</value>
+  </data>
+  <data name="PortableOnFolderToolTip" xml:space="preserve">
+    <value>Icono Portable dentro de la Carpeta</value>
+  </data>
+  <data name="IconOnFolderToolTip" xml:space="preserve">
+    <value>Icono dentro de la Carpeta</value>
+  </data>
+  <data name="ExternalIconTooltip" xml:space="preserve">
+    <value>Icono externo (No Portable)</value>
+  </data>
+  <data name="ApplySubfolders" xml:space="preserve">
+    <value>Aplicar subcarpetas</value>
+  </data>
 </root>
