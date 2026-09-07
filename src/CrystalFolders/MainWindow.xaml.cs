@@ -463,6 +463,7 @@ namespace CrystalFolders
                 try
                 {
                     // Regresar la fecha de modificación de la carpeta
+                    Console.WriteLine($"Dir: {directory}");
                     Directory.SetLastWriteTime(directory, modifDate);
                 }
                 catch
@@ -549,8 +550,9 @@ namespace CrystalFolders
 
         private void AutoApplyBtn_Click(object sender, RoutedEventArgs e)
         {
-            // No Folder that has icon inside
-            if (!folderList.Any(folder => Icons.AnalyzeFolder(folder).HasIconFileInside))
+            // Buscar iconos en las carpetas y en cualquiera de sus subcarpetas.
+            if (!folderList.Any(folder => Directory.EnumerateFiles(
+                    ResolveFolderPath(folder), "*.ico", SearchOption.AllDirectories).Any()))
                 return;
             
             isApplyingPortable = true;
@@ -613,7 +615,6 @@ namespace CrystalFolders
                     folderList.Add(directory);
 
             // En caso de que sea portable, se hace una copia de la ruta del icono y se modifica icoPath
-            string icoPathBackup = isPortable ? icoPath : "";
             icoPath = isPortable ? $"CF_Icon {Path.GetFileName(icoPath)}" : icoPath;
             
             // Cuidao con + de 30 folders, mensaje de error y atpc
@@ -644,6 +645,12 @@ namespace CrystalFolders
                 string fullPath = folder.StartsWith(@"..\")
                     ? $@"{folder.Replace(@"..\", $@"{userPath}\")}\" 
                     : $@"{folder}\";
+                
+                Icons.FolderIconInfo info = Icons.AnalyzeFolder(fullPath);
+                
+                // Si está aplicando iconos pero justo esta carpeta no tiene ignórala
+                if (isApplyingPortable && !info.HasIconFileInside)
+                    continue;
 
                 // Si el switch de Portable está activado...
                 if (isPortable)
@@ -651,33 +658,33 @@ namespace CrystalFolders
                     if (isRestore)
                     {
                         // Si se restaura, borrar cualquier icono que se haya copiado anteriormente
-                        string[] files = Directory.GetFiles(fullPath);
-                        foreach (string file in files)
-                            if (file.Contains("CF_Icon")) 
-                                File.Delete(file);
+                        if (info.HasPortableIconInside) 
+                            File.Delete(info.PortableIconPath);
                     }
                     else
                     {
                         // Copiar el icono y agregarle el atributo de oculto
-                        string portableIcoPath = $"{fullPath}{icoPath}";
-                        try
+                        if (!info.HasPortableIconInside)
                         {
-                            File.Copy(icoPathBackup, portableIcoPath);
+                            info.PortableIconPath = Icons.IconToPortableIcon(info.FirstIconInsidePath);
+                            try
+                            {
+                                File.Copy(info.FirstIconInsidePath, info.PortableIconPath);
+                            }
+                            catch
+                            {
+                                File.Delete(info.PortableIconPath);
+                                File.Copy(info.FirstIconInsidePath, info.PortableIconPath);
+                            }
                         }
-                        catch
-                        {
-                            File.Delete(portableIcoPath);
-                            File.Copy(icoPathBackup, portableIcoPath);
-                        }
-
-                        File.SetAttributes(Path.Combine(portableIcoPath),
-                            File.GetAttributes(icoPathBackup) | FileAttributes.Hidden);
+                        
+                        File.SetAttributes(Path.Combine(info.PortableIconPath),
+                            File.GetAttributes(info.PortableIconPath) | FileAttributes.Hidden);
                     }
                 }
                 
                 if (isApplyingPortable)
                 {
-                    Icons.FolderIconInfo info = Icons.AnalyzeFolder(folder);
                     if (!info.HasIconFileInside)
                         continue;
                     
@@ -728,7 +735,7 @@ namespace CrystalFolders
                 }
                 catch
                 {
-                    Console.WriteLine($"Folder LastWriteTime Error: {fullPath}");
+                    Console.WriteLine($"Folder SetLastWriteTime Error: {modifDate} : {fullPath}");
                 }
             }
 
