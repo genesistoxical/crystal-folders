@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CrystalFolders
@@ -7,6 +7,9 @@ namespace CrystalFolders
     {
         [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
         public static extern uint SHGetSetFolderCustomSettings(ref SHFOLDERCUSTOMSETTINGS pfcs, string pszPath, uint dwReadWrite);
+
+        [DllImport("Shell32.dll", CharSet = CharSet.Auto)]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public struct SHFOLDERCUSTOMSETTINGS

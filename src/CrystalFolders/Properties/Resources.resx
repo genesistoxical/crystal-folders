@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -258,5 +258,23 @@
   <data name="Ver" xml:space="preserve">
     <value>1.4.0</value>
     <comment>@Invariant</comment>
+  </data>
+  <data name="DefaultFolder" xml:space="preserve">
+    <value>Default folder</value>
+  </data>
+  <data name="DefaultFolderActivated" xml:space="preserve">
+    <value>Default Pixie yellow folder applied to all system folders.</value>
+  </data>
+  <data name="DefaultFolderDeactivated" xml:space="preserve">
+    <value>Default system folder restored to original Windows icon.</value>
+  </data>
+  <data name="ContextMenuOption" xml:space="preserve">
+    <value>Right-click menu (Win 11)</value>
+  </data>
+  <data name="ContextMenuActivated" xml:space="preserve">
+    <value>Right-click menu integrated into Windows 11.</value>
+  </data>
+  <data name="ContextMenuDeactivated" xml:space="preserve">
+    <value>Right-click menu removed from Windows 11.</value>
   </data>
 </root>

@@ -37,6 +37,9 @@ namespace CrystalFolders
 
             // Obtener la ruta de usuario
             userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+            // Auto-activar silenciosamente el menu contextual moderno en Windows 11
+            Classes.ContextMenuHelper.AutoRegisterIfFirstRunAsync();
         }
 
         public void ApplyFolderSettings(string folderPath)
@@ -659,6 +662,9 @@ namespace CrystalFolders
                 }
             }
 
+            // Notificar al Shell para refrescar inmediatamente los iconos en Explorer sin F5
+            Icons.SHChangeNotify(0x08000000 /* SHCNE_ASSOCCHANGED */, 0x0000 /* SHCNF_IDLIST */, IntPtr.Zero, IntPtr.Zero);
+
             // Growl message dependiendo de si se han personalizado o restaurado
             if (!isRestore)
             {
@@ -770,7 +776,7 @@ namespace CrystalFolders
         private void Info_Click(object sender, RoutedEventArgs e)
         {
             About dlgextract = new About() { Owner = this };
-            dlgextract.Show();
+            dlgextract.ShowDialog();
         }
 
         private void LabelSub_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -778,13 +784,13 @@ namespace CrystalFolders
             // Cambiar de posición el texto dependiendo del idioma
             if (!isRestore)
             {
-                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 266, 88, 0)
-                    : new Thickness(478, 266, 88, 0);
+                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 252, 88, 0)
+                    : new Thickness(478, 252, 88, 0);
             }
             else
             {
-                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 266, 88, 0)
-                    : new Thickness(494, 266, 88, 0);
+                Dotsub.Margin = Config.currentLan == "en" ? new Thickness(476, 252, 88, 0)
+                    : new Thickness(494, 252, 88, 0);
             }
 
         }
