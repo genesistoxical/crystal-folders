@@ -255,4 +255,22 @@
   <data name="Oops" xml:space="preserve">
     <value>Ups, no se pueden agregar las carpetas. Por favor, arrástralas y suéltalas en la app.</value>
   </data>
+  <data name="DefaultFolder" xml:space="preserve">
+    <value>Carpeta predeterminada</value>
+  </data>
+  <data name="DefaultFolderActivated" xml:space="preserve">
+    <value>Se configuró la carpeta amarilla Pixie como predeterminada de Windows.</value>
+  </data>
+  <data name="DefaultFolderDeactivated" xml:space="preserve">
+    <value>Se restauró la carpeta predeterminada original de Windows.</value>
+  </data>
+  <data name="ContextMenuOption" xml:space="preserve">
+    <value>Menú clic derecho (Win 11)</value>
+  </data>
+  <data name="ContextMenuActivated" xml:space="preserve">
+    <value>Menú contextual integrado en Windows 11.</value>
+  </data>
+  <data name="ContextMenuDeactivated" xml:space="preserve">
+    <value>Menú contextual retirado de Windows 11.</value>
+  </data>
 </root>

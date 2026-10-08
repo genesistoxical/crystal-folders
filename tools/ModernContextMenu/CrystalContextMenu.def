@@ -1,0 +1,4 @@
+LIBRARY CrystalContextMenu
+EXPORTS
+    DllGetClassObject PRIVATE
+    DllCanUnloadNow PRIVATE

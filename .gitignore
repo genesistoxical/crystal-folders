@@ -362,3 +362,17 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Windows Shell / NuGet temporary files
+desktop.ini
+nuget.exe
+*.lnk
+
+# C++ Build intermediate artifacts
+*.obj
+*.res
+*.exp
+*.lib
+tools/ModernContextMenu/*.dll
+tools/ModernContextMenu/*.cer
+tools/ModernContextMenu/*.msix

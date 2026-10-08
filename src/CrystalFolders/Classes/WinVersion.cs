@@ -1,4 +1,4 @@
-﻿// The MIT License (MIT)
+// The MIT License (MIT)
 // Windows Version Detection 1.0.0
 // Copyright (C) 2022 by Shao Voon Wong (shaovoon@yahoo.com)
 //
@@ -59,7 +59,7 @@ namespace win_version_csharp
         {
             if (GetVersion(out var info))
             {
-                return buildNumber >= info.BuildNum;
+                return info.BuildNum >= buildNumber;
             }
             return false;
         }
